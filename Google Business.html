@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Via Pizza – Fiche Google (maquette)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3f4;--card:#fff;--ink:#202124;--sub:#5f6368;--line:#e8eaed;--blue:#1a73e8;--green:#188038;--star:#fbbc04;--chip:#e8f0fe;--onblue:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#131314;--card:#1f1f1f;--ink:#e8eaed;--sub:#9aa0a6;--line:#3c4043;--blue:#8ab4f8;--green:#81c995;--chip:#2a3a55;--onblue:#202124}}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 Roboto,Arial,sans-serif;display:flex;justify-content:center;padding:24px 12px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.card{width:100%;max-width:408px;background:var(--card);border-radius:16px;box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 12px rgba(60,64,67,.15);overflow:hidden}
+.photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:210px}
+.ph{position:relative;background-size:cover;background-position:center;cursor:pointer;display:block;width:100%;height:100%}
+.ph.big{grid-row:1/3}
+.ph small{position:absolute;right:8px;bottom:6px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:3px 9px;border-radius:10px}
+.logo{position:absolute;left:10px;bottom:10px;width:52px;height:52px;border-radius:50%;border:2px solid #fff;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.body{padding:16px 18px 4px}
+h1{font:400 24px/1.25 Roboto}
+.rate{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.rate b{font-weight:500}
+.stars{color:var(--star);letter-spacing:1px;font-size:15px}
+.link{color:var(--blue);text-decoration:none;cursor:pointer}
+.cat{color:var(--sub);margin-top:2px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{background:var(--chip);color:var(--blue);font-weight:500;padding:5px 12px;border-radius:99px;font-size:13px}
+.status{margin-top:12px}.status b,.ok{color:var(--green);font-weight:500}
+.actions{display:flex;justify-content:space-between;padding:16px 8px 14px;border-bottom:1px solid var(--line);margin-top:6px}
+.act{flex:1;text-align:center;color:var(--blue);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}
+.act i{display:grid;place-items:center;width:44px;height:44px;margin:0 auto 6px;border-radius:50%;border:1px solid var(--line);font-style:normal;font-size:18px;transition:background .15s}
+.act:hover i{background:var(--chip)}
+.act.main i{background:var(--blue);color:var(--onblue);border-color:var(--blue)}
+.act.on i{background:var(--chip)}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;padding:13px 0;font-weight:500;color:var(--sub);font-size:13px}
+.tabs button.on{color:var(--blue);box-shadow:inset 0 -3px var(--blue)}
+.row{display:flex;gap:18px;padding:13px 18px;align-items:flex-start}
+.row .ic{width:22px;text-align:center;color:var(--blue);font-size:17px}
+.sec{padding:16px 18px;border-top:8px solid var(--bg)}
+.sec h2{font:500 16px Roboto;margin-bottom:12px}
+.more{color:var(--blue);font-weight:500;margin-top:10px;display:block}
+.menu{display:flex;gap:10px;overflow:auto;padding-bottom:4px;scroll-snap-type:x proximity}
+.dish{min-width:136px;text-align:left;scroll-snap-align:start}
+.dish .th{height:104px;border-radius:10px;background-size:cover;background-position:top center;border:1px solid var(--line)}
+.dish b{display:block;margin-top:6px;font-weight:500;line-height:1.25}.dish span{color:var(--sub);font-size:13px}
+.post{display:flex;gap:12px;background:var(--bg);border-radius:12px;padding:12px}
+.post .em{font-size:34px}.post b{font-weight:500}.post p{color:var(--sub);font-size:13px}
+.big-r{display:flex;gap:18px;align-items:center}
+.big-r strong{font:400 48px/1 Roboto}
+.rv{padding:14px 0;border-top:1px solid var(--line)}
+.rv .who{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.av{width:32px;height:32px;border-radius:50%;color:#fff;display:grid;place-items:center;font-weight:500}
+.rv small,.sub{color:var(--sub)}
+.tag{font-size:10.5px;color:var(--sub);border:1px dashed var(--line);border-radius:6px;padding:1px 6px;margin-left:6px;font-weight:400;vertical-align:middle}
+.reply{margin:8px 0 0 6px;padding:8px 0 4px 12px;border-left:3px solid var(--line)}.reply b{font-weight:500}.reply p{color:var(--sub);font-size:13px}
+.ext{display:flex;flex-direction:column}.ext a{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none}.ext a:first-child{border-top:0}.ext a span{color:var(--sub);font-size:12px}.ext a:after{content:"↗";color:var(--blue)}
+.cta{display:flex;gap:10px;padding:16px 18px 20px}
+.cta a{flex:1;text-align:center;padding:11px;border-radius:99px;border:1px solid var(--line);color:var(--blue);font-weight:500;text-decoration:none;cursor:pointer}
+.cta a.p{background:var(--blue);color:var(--onblue);border-color:var(--blue)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mgrid .th{height:190px;border-radius:12px;background-size:cover;background-position:top center;border:1px solid var(--line)}
+.mgrid b{display:block;margin-top:4px;font-weight:500;font-size:13px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:13px}
+.note{max-width:408px;margin:12px auto 0;text-align:center;color:var(--sub);font-size:12px}
+/* Galerie plein écran */
+.ov{position:fixed;inset:0;z-index:50;background:var(--card);overflow:auto}
+.ov header{position:sticky;top:0;background:var(--card);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);z-index:1}
+.ov header h3{font:500 18px Roboto;flex:1}
+.x{width:40px;height:40px;border-radius:50%;font-size:22px}.x:hover{background:var(--bg)}
+.gf{display:flex;gap:8px;padding:12px 16px}
+.gf button{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px}
+.gf button.on{background:var(--chip);color:var(--blue);border-color:transparent;font-weight:500}
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;padding:0 16px 24px;max-width:900px;margin:0 auto}
+.gg button{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.94);display:flex;flex-direction:column;color:#fff}
+.lb .top{display:flex;justify-content:space-between;align-items:center;padding:10px 16px}
+.lb .top .x{color:#fff}.lb .top .x:hover{background:rgba(255,255,255,.15)}
+.lb .stage{flex:1;overflow:auto;display:grid;place-items:center;padding:0 56px;touch-action:pan-x pan-y pinch-zoom}
+.lb img{max-width:100%;max-height:calc(100vh - 120px);object-fit:contain;cursor:zoom-in}
+.lb img.z{max-height:none;max-width:none;width:160%;cursor:zoom-out}
+.lb .stage.zoomed{display:block}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px}
+.nav:hover{background:rgba(255,255,255,.3)}.nav.l{left:8px}.nav.r{right:8px}
+.cap{text-align:center;padding:10px 16px 18px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#323232;color:#fff;padding:12px 20px;border-radius:8px;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+</style>
+</head>
+<body>
+<div>
+<div class="card">
+  <div class="photos">
+    <button class="ph big" data-open="0" style="background-image:url(assets/google-business/facade.jpg)" aria-label="Voir les photos"><img class="logo" src="assets/google-business/logo.jpg" alt="Logo Via Pizza"></button>
+    <button class="ph" data-open="1" style="background-image:url(assets/google-business/interieur.jpg)" aria-label="Intérieur"></button>
+    <button class="ph" data-open="2" style="background-image:url(assets/google-business/IMG_2546.jpg)" aria-label="Voir plus de photos"><small>📷 Voir les photos</small></button>
+  </div>
+
+  <div class="body">
+    <h1>Via Pizza</h1>
+    <div class="rate"><b>5,0</b><span class="stars">★★★★★</span><a class="link" data-tab="avis">(11)</a><span class="sub">· €1–20</span></div>
+    <div class="cat">Pizzeria · Restauration rapide</div>
+    <div class="badges"><span class="badge">🍕 Sur place</span><span class="badge">🛍️ À emporter</span><span class="badge">⭐ Très bien noté</span></div>
+    <div class="status"><b>Ouvert</b> · Ferme à 14:30 · Rouvre à 18:00</div>
+  </div>
+
+  <div class="actions">
+    <a class="act main" href="tel:+33386288574"><i>📞</i>Appeler</a>
+    <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=6+route+de+Cosne+58310+Saint-Amand-en-Puisaye"><i>➤</i>Itinéraire</a>
+    <button class="act" id="save"><i>🔖</i><span>Enregistrer</span></button>
+    <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=restaurants+pr%C3%A8s+de+6+route+de+Cosne+58310+Saint-Amand-en-Puisaye"><i>📍</i>À proximité</a>
+    <button class="act" id="share"><i>↗</i>Partager</button>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button class="on" data-tab="vue">Vue d'ensemble</button><button data-tab="menu">Menu</button><button data-tab="avis">Avis</button><button data-tab="about">À propos</button>
+  </nav>
+
+  <!-- VUE D'ENSEMBLE -->
+  <div data-panel="vue">
+    <div class="row"><span class="ic">📍</span><div>6 route de Cosne, 58310 Saint-Amand-en-Puisaye<br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=6+route+de+Cosne+58310+Saint-Amand-en-Puisaye">Voir sur la carte</a></div></div>
+    <div class="row"><span class="ic">🕑</span><div><span class="ok">Ouvert</span> · Ferme à 14:30<br><span class="sub">Rouvre à 18:00</span></div></div>
+    <div class="row"><span class="ic">📞</span><a class="link" href="tel:+33386288574">03 86 28 85 74</a></div>
+    <div class="row"><span class="ic">✔</span><div>Informations mises à jour par l'établissement</div></div>
+
+    <div class="sec">
+      <h2>Actualités de l'établissement</h2>
+      <div class="post"><span class="em">🔥</span><div><b>Nouveau : livraison gratuite<span class="tag">Exemple</span></b><p>Appelez le 03 86 28 85 74 et on vous livre.</p></div></div>
+    </div>
+
+    <div class="sec">
+      <h2>Avis</h2>
+      <div class="big-r"><strong>5,0</strong><div><div class="stars" style="font-size:18px">★★★★★</div><small class="sub">11 avis Google</small></div></div>
+      <div id="rv-short"></div>
+      <a class="more link" data-tab="avis">Voir tous les avis</a>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <div data-panel="menu" hidden>
+    <div class="sec" style="border-top:0">
+      <h2>La carte</h2>
+      <div class="mgrid" id="mgrid"></div>
+      <p class="sub" style="margin-top:12px">Touchez une page pour l'agrandir.</p>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <div data-panel="avis" hidden>
+    <div class="sec" style="border-top:0">
+      <div class="big-r"><strong>5,0</strong><div><div class="stars" style="font-size:18px">★★★★★</div><small class="sub">11 avis Google</small></div></div>
+      <div id="rv-all"></div>
+      <p class="sub" style="margin-top:10px;font-size:12px">Les avis ne sont pas vérifiés · Source : Google</p>
+    </div>
+  </div>
+
+  <!-- A PROPOS -->
+  <div data-panel="about" hidden>
+    <div class="sec" style="border-top:0">
+      <h2>À propos</h2>
+      <p>Nouveau restaurant pizzeria près de chez vous. Pizzas, salades, pâtes, tacos, burgers et desserts, sur place ou à emporter.</p>
+    </div>
+    <div class="sec"><h2>Services</h2><div class="chips"><span>Sur place</span><span>À emporter</span><span>Livraison</span><span>Paiement CB</span></div><p class="sub" style="margin-top:8px;font-size:12px">À confirmer avec le propriétaire.</p></div>
+    <div class="sec"><h2>Retrouvez Via Pizza ailleurs</h2><div class="ext">
+      <a href="https://www.facebook.com/p/Via-pizza-saint-Amand-en-puisaye-61588784464415/" target="_blank" rel="noopener"><div><b style="font-weight:500">Facebook</b><br><span>Via pizza saint Amand en puisaye</span></div></a>
+      <a href="https://www.pagesjaunes.fr/pros/65178233" target="_blank" rel="noopener"><div><b style="font-weight:500">Pages Jaunes</b><br><span>Fiche annuaire</span></div></a>
+      <a href="https://fr.mappy.com/poi/6a5b6b180831c52bd5625ba4" target="_blank" rel="noopener"><div><b style="font-weight:500">Mappy</b><br><span>Plan et itinéraire</span></div></a>
+      <a href="https://annuaire-entreprises.data.gouv.fr/etablissement/10619680100018" target="_blank" rel="noopener"><div><b style="font-weight:500">Annuaire des Entreprises</b><br><span>Fiche officielle (data.gouv.fr)</span></div></a>
+    </div></div>
+    <div class="sec"><h2>Infos pratiques</h2>
+      <p>🕑 Midi jusqu'à 14:30 · Soir dès 18:00</p>
+      <p style="margin-top:6px">💶 €1–20 par personne</p>
+      <p style="margin-top:6px">📍 6 route de Cosne, 58310 Saint-Amand-en-Puisaye</p>
+      <p style="margin-top:6px">📞 03 86 28 85 74</p></div>
+  </div>
+
+  <div class="cta"><a class="p" href="tel:+33386288574">Appeler</a><a id="review" target="_blank" rel="noopener" href="https://share.google/uq9wUQqFj9lwxuaAB">Écrire un avis</a></div>
+</div>
+<p class="note">Maquette de fiche Google · vraies données : nom, adresse, téléphone, note 5,0 (11 avis), horaires, photos et menus · éléments « Exemple » à remplacer</p>
+</div>
+
+<!-- Galerie -->
+<div class="ov" id="gallery" hidden>
+  <header><button class="x" data-close="gallery" aria-label="Fermer">←</button><h3>Photos</h3></header>
+  <div class="gf" id="gf"><button class="on" data-f="all">Tout</button><button data-f="etab">Établissement</button><button data-f="menu">Menu</button></div>
+  <div class="gg" id="gg"></div>
+</div>
+<!-- Visionneuse -->
+<div class="lb" id="lb" hidden>
+  <div class="top"><span id="lbn"></span><button class="x" id="lbx" aria-label="Fermer">✕</button></div>
+  <div class="stage" id="stage"><img id="lbi" alt=""></div>
+  <button class="nav l" id="prev" aria-label="Précédente">‹</button><button class="nav r" id="next" aria-label="Suivante">›</button>
+  <div class="cap" id="cap"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const PH=[
+ {s:"assets/google-business/facade.jpg",c:"Façade",g:"etab"},{s:"assets/google-business/interieur.jpg",c:"Salle",g:"etab"},
+ {s:"assets/google-business/IMG_2546.jpg",c:"Rue et passage piéton",g:"etab"},{s:"assets/google-business/IMG_2552.jpg",c:"Terrasse",g:"etab"},
+ {s:"assets/google-business/menus/menu-0-couverture.jpg",c:"Menu · Couverture",g:"menu"},
+ {s:"assets/google-business/menus/bete-de-menu.jpg",c:"Menu · Pizzas",g:"menu"},
+ {s:"assets/google-business/menus/menu-1-salades-pates-escalopes.jpg",c:"Menu · Salades, pâtes, escalopes",g:"menu"},
+ {s:"assets/google-business/menus/menu-2-box-offres-desserts.jpg",c:"Menu · Box, offres, desserts",g:"menu"},
+ {s:"assets/google-business/menus/menu-4-tacos-sandwichs-burgers.jpg",c:"Menu · Tacos, sandwichs, burgers",g:"menu"}
+];
+const idx=src=>PH.findIndex(p=>p.s===src);
+const MENUS=[
+ ["assets/google-business/menus/bete-de-menu.jpg","Pizzas"],
+ ["assets/google-business/menus/menu-1-salades-pates-escalopes.jpg","Salades · Pâtes · Escalopes"],
+ ["assets/google-business/menus/menu-2-box-offres-desserts.jpg","Box · Offres · Desserts"],
+ ["assets/google-business/menus/menu-4-tacos-sandwichs-burgers.jpg","Tacos · Sandwichs · Burgers"]
+];
+const toast=m=>{const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)};
+
+/* Onglets */
+function tab(n){
+  $$("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==n);
+  $$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===n));
+  $("#tabs").scrollIntoView({block:"nearest"});
+}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){e.preventDefault();tab(t.dataset.tab)}});
+
+/* Plats populaires + page menu (images du dossier Menus_web) */
+$("#mgrid").innerHTML=MENUS.map(([s,n])=>`<button data-open="${idx(s)}"><div class="th" style="background-image:url(${s})"></div><b>${n}</b></button>`).join("");
+
+/* Avis (exemples) */
+const RV=[ // [nom, couleur, date, visite, texte, réponse du propriétaire]
+["Maddy Weeks","#00897b","il y a 1 semaine","Visité en octobre","Service impeccable et cuisine délicieuse !",""],
+["Sylvie Faure","#6d4c41","il y a 1 semaine","Visité en septembre","Nous sommes arrivés à 14h20 un dimanche au kebab. C'était quasiment leur fermeture, mais nous avons été super bien reçu 👍👍👍👍. Ils nous ont fait un super kebab avec pain maison et nous avons pu manger à l…",""],
+["Dandra","#f9a825","il y a 2 semaines","Visité en septembre","Simple, rapide et très abordable …",""],
+["Émilie Paen","#ec407a","il y a 4 semaines","Visité en septembre","Ça fait plusieurs fois que l'on vient. Très sympa pizza burger et kebab sont parfait",""],
+["Olivier B","#d84315","il y a 1 mois","Visité en août","",""],
+["Pascal GRANDVILLAIN","#5d4037","il y a 1 mois","Visité en août","Les pizzas sont toutes excellentes .. on a testé : les calzone, la chef et ce soir la Genova ainsi que le burger bacon.. tout est très bon et très bien servi et de qualité .. le personnel est très sympathique aussi bien a la commande qu'au service... une bonne pizzeria que l'on recommande... …","Merci beaucoup pascal ça fait plaisir d'entendre ça et ça nous donne du courage pour mieux vous servir 😍 au plaisir à très vite"],
+["Isabelle Lemaire","#ef6c00","il y a 2 mois","Visité en août","Super délicieux, pizza chaude, la pâte croustillante et bien garnis, les tacos chaud et super bon. Et personnel très gentil. Franchement top. …",""],
+["Jovan","#5e35b1","il y a 2 mois","Visité en août","C'était très biens le tacos était parfait 👌avec le burger et une pizza tout était très biens 👍 …",""],
+["Isabelle Lebas","#2e7d32","il y a 2 mois","Visité en juillet","Je recommande. Un snack de qualité et un personnel au top …",""],
+["williams stephane","#8e24aa","il y a 2 mois","Visité en août","",""],
+["Kevin AKIMANA","#c2185b","il y a 2 mois","Visité en juillet","",""]];
+const rv=a=>a.map(([n,c,d,v,t,r])=>`<div class="rv"><div class="who"><div class="av" style="background:${c}">${n[0]}</div><div><b style="font-weight:500">${n}</b><br><small>${d} · ${v}</small></div></div><div class="stars">★★★★★</div>${t?`<p>${t}</p>`:""}${r?`<div class="reply"><b>Via pizza (propriétaire)</b><p>${r}</p></div>`:""}</div>`).join("");
+$("#rv-short").innerHTML=rv(RV.slice(0,3));$("#rv-all").innerHTML=rv(RV);
+
+/* Galerie */
+function grid(f){
+  $("#gg").innerHTML=PH.map((p,i)=>(f==="all"||p.g===f)?`<button data-open="${i}" style="background-image:url(${p.s})" aria-label="${p.c}"></button>`:"").join("");
+  $$("#gf button").forEach(b=>b.classList.toggle("on",b.dataset.f===f));
+}
+let cur=0;
+function show(i){
+  cur=(i+PH.length)%PH.length;const p=PH[cur];
+  $("#lbi").src=p.s;$("#lbi").alt=p.c;$("#lbi").classList.remove("z");$("#stage").classList.remove("zoomed");
+  $("#cap").textContent=p.c;$("#lbn").textContent=(cur+1)+" / "+PH.length;
+}
+const openLb=i=>{show(i);$("#lb").hidden=false};
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]");
+  if(o){const i=+o.dataset.open;
+    if(o.closest(".photos")&&i!==0&&i!==1){grid("all");$("#gallery").hidden=false}   // vignette « Voir les photos »
+    else openLb(i);
+    return}
+  const c=e.target.closest("[data-close]");if(c)$("#"+c.dataset.close).hidden=true;
+  const f=e.target.closest("#gf button");if(f)grid(f.dataset.f);
+});
+$("#lbx").onclick=()=>$("#lb").hidden=true;
+$("#prev").onclick=()=>show(cur-1);$("#next").onclick=()=>show(cur+1);
+$("#lbi").onclick=e=>{const z=e.target.classList.toggle("z");$("#stage").classList.toggle("zoomed",z)};
+document.addEventListener("keydown",e=>{
+  if(!$("#lb").hidden){if(e.key==="Escape")$("#lb").hidden=true;if(e.key==="ArrowLeft")show(cur-1);if(e.key==="ArrowRight")show(cur+1)}
+  else if(!$("#gallery").hidden&&e.key==="Escape")$("#gallery").hidden=true;
+});
+let x0=null;
+$("#stage").addEventListener("touchstart",e=>x0=e.touches[0].clientX,{passive:true});
+$("#stage").addEventListener("touchend",e=>{if(x0===null||$("#lbi").classList.contains("z"))return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)show(cur+(d<0?1:-1));x0=null});
+$$(".photos .ph")[0].onclick=null;
+// la grande photo et l'intérieur ouvrent la visionneuse ; la 3e ouvre la galerie
+grid("all");
+
+/* Enregistrer */
+let saved=false;try{saved=localStorage.getItem("via-saved")==="1"}catch(e){}
+const paintSave=()=>{$("#save").classList.toggle("on",saved);$("#save span").textContent=saved?"Enregistré":"Enregistrer"};
+paintSave();
+$("#save").onclick=()=>{saved=!saved;try{localStorage.setItem("via-saved",saved?"1":"0")}catch(e){}paintSave();toast(saved?"Via Pizza enregistré dans vos lieux":"Retiré de vos lieux")};
+
+/* Partager */
+$("#share").onclick=async()=>{
+  const url="https://share.google/uq9wUQqFj9lwxuaAB";
+  if(navigator.share){try{await navigator.share({title:"Via Pizza",text:"Via Pizza – Saint-Amand-en-Puisaye",url});return}catch(e){if(e.name==="AbortError")return}}
+  try{await navigator.clipboard.writeText(url);toast("Lien copié")}catch(e){prompt("Copiez le lien :",url)}
+};
+</script>
+</body>
+</html>

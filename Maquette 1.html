@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Via Pizza – Kebab, Pizzas & Burgers à Saint-Amand-en-Puisaye</title>
+<meta name="description" content="Via Pizza à Saint-Amand-en-Puisaye : pizzas, kebabs, tacos, burgers, bowls. Livraison gratuite.">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* ===== 1. VARIABLES : la palette est centralisée ici ===== */
+:root{
+  --red:#E4002B; --yellow:#FFC20E; --orange:#FF6B1A; --navy:#101B4B; --green:#1FA45B;
+  --cream:#FFF6E3; --ink:#1b1b1f; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+.title{font-family:'Bangers',cursive;letter-spacing:2px;line-height:1}
+section{padding:90px 20px}
+.wrap{max-width:1100px;margin:0 auto}
+
+/* ===== 2. BOUTONS (Commander et Adresse partagent le même style) ===== */
+.btn{display:inline-block;padding:15px 30px;border-radius:50px;font:800 1rem 'Poppins',sans-serif;cursor:pointer;text-decoration:none;
+  border:3px solid var(--ink);background:var(--yellow);color:var(--ink);box-shadow:5px 5px 0 var(--ink);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn:hover{transform:translate(-3px,-3px) rotate(-1.5deg);box-shadow:9px 9px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+
+/* ===== 3. EN-TÊTE : logo + bouton Commander uniquement ===== */
+header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;transition:background .3s,box-shadow .3s,padding .3s}
+header.scrolled{background:var(--navy);box-shadow:0 6px 24px rgba(0,0,0,.25);padding:8px 24px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;font-size:1.7rem;text-decoration:none}
+.brand img{width:48px;height:48px;border-radius:50%;border:2px solid var(--yellow);transition:transform .6s var(--ease)}
+.brand:hover img{transform:rotate(360deg)}
+.hbtns{display:flex;gap:12px}
+header .btn{padding:9px 22px;box-shadow:3px 3px 0 var(--ink)}
+@media(max-width:520px){header .btn{padding:8px 14px;font-size:.85rem}.brand{font-size:1.3rem}.brand img{width:38px;height:38px}.hbtns{gap:8px}}
+
+/* ===== 4. HERO : la photo du restaurant est la première image ===== */
+.hero{min-height:100vh;display:flex;align-items:center;color:#fff;position:relative;overflow:hidden;padding-top:100px}
+.hero-bg{position:absolute;inset:0;background:url(img/photo1.jpg) center/cover no-repeat;animation:zoom 18s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.1)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(228,0,43,.88) 0%,rgba(16,27,75,.78) 55%,rgba(16,27,75,.35) 100%)}
+.hero .wrap{position:relative;z-index:2}
+.badge{display:inline-block;background:var(--yellow);color:var(--ink);padding:6px 18px;border-radius:30px;font-weight:800;
+  transform:rotate(-3deg);animation:wiggle 3s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) scale(1.06)}}
+.hero h1{font-size:clamp(3.2rem,9vw,7rem);margin:18px 0;text-shadow:5px 5px 0 var(--navy)}
+.hero h1 span{color:var(--yellow)}
+.hero p{font-size:1.15rem;max-width:520px;margin-bottom:28px}
+.cta{display:flex;gap:16px;flex-wrap:wrap}
+.wave{position:absolute;bottom:-1px;left:0;width:100%;height:70px;z-index:2}
+
+/* ===== 5. BANDEAU DÉFILANT ===== */
+.marquee{background:var(--navy);color:var(--yellow);overflow:hidden;white-space:nowrap;padding:16px 0;transform:rotate(-1.2deg);margin:-20px -10px 0;position:relative;z-index:5}
+.marquee div{display:inline-block;animation:scroll 22s linear infinite;font-family:'Bangers';font-size:1.9rem;letter-spacing:3px}
+.marquee span{margin:0 26px}
+.marquee span:nth-child(3n){color:#fff}.marquee span:nth-child(3n+1){color:var(--orange)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ===== 6. APPARITION AU SCROLL ===== */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.show{opacity:1;transform:none}
+.sec-title{text-align:center;margin-bottom:40px}
+.sec-title h2{font-size:clamp(2.5rem,6vw,4.4rem);color:var(--red)}
+.sec-title p{color:#555}
+
+/* ===== 7. INFOS RAPIDES ===== */
+.infos{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;text-align:center;padding:60px 20px 20px}
+.infos div{min-width:200px}
+.infos b{display:block;font-family:'Bangers';font-size:2.2rem;letter-spacing:1px;color:var(--red)}
+.infos span{color:#555}
+
+/* ===== 8. LA CARTE : les 2 images du menu ===== */
+#menu{background:var(--navy)}
+#menu .sec-title h2{color:var(--yellow)}#menu .sec-title p{color:#cdd3ff}
+.hint{text-align:center;color:#cdd3ff;margin-top:22px;font-size:.9rem}
+.promo{background:var(--yellow);color:var(--ink);border:4px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--red);
+  padding:22px 26px;text-align:center;margin:0 auto 34px;max-width:720px;transform:rotate(-1deg)}
+.promo b{font-family:'Bangers';font-size:clamp(2rem,5vw,3.2rem);color:var(--red);letter-spacing:2px;font-weight:400;display:block;line-height:1.1}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:30px;position:sticky;top:64px;z-index:20;padding:10px 0;background:var(--navy)}
+.tab{background:transparent;color:#fff;border:2px solid var(--yellow);padding:9px 22px;border-radius:30px;font:600 1rem 'Poppins',sans-serif;cursor:pointer;
+  transition:transform .25s var(--ease),background .25s,color .25s}
+.tab:hover{transform:scale(1.08)}
+.tab.active{background:var(--yellow);color:var(--ink)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px;color:#fff}
+.panel-head p{color:#cdd3ff;max-width:640px}
+.btn.small{padding:9px 20px;font-size:.9rem;box-shadow:3px 3px 0 var(--ink)}
+.sizes{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.size{flex:1;min-width:150px;background:#fff;color:var(--ink);border-radius:18px;padding:14px;text-align:center;border:3px solid var(--yellow)}
+.size small{display:block;color:#666;font-weight:600}
+.size b{font-family:'Bangers';font-size:2.2rem;color:var(--red);font-weight:400;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.item{background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;animation:pop .5s var(--ease) both;transition:transform .3s var(--ease)}
+.item:hover{transform:translateY(-8px) scale(1.03)}
+.item .ph{aspect-ratio:16/10;overflow:hidden;background:#f3ece0}
+.item .ph img,.item .ph .bg{width:100%;height:100%;transition:transform .5s var(--ease)}
+.item .ph img{object-fit:cover;object-position:top}
+.item .ph .bg{background-repeat:no-repeat}
+.item:hover .ph img,.item:hover .ph .bg{transform:scale(1.12)}
+.item .body{padding:16px 18px 20px;position:relative}
+.item.text .body{border-left:8px solid var(--c,var(--red));padding-left:20px}
+.item h3{font-family:'Bangers';font-size:1.7rem;letter-spacing:1px;color:var(--c,var(--red));font-weight:400;line-height:1.1}
+.item p{font-size:.85rem;color:#555;margin-top:6px}
+.prices{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.prices span{background:var(--cream);border-radius:20px;padding:3px 12px;font-weight:800;font-size:.9rem}
+.prices span.menu{background:var(--yellow)}
+.prices em{font-style:normal;font-weight:600;font-size:.75rem;color:#666;margin-right:4px}
+.extras{margin-top:26px;background:rgba(255,255,255,.08);border-radius:16px;padding:18px 22px;color:#e6e9ff;font-size:.92rem}
+.extras b{color:var(--yellow)}
+@keyframes pop{from{opacity:0;transform:scale(.88) translateY(25px)}to{opacity:1;transform:none}}
+
+/* ===== 9. FENÊTRES POP-UP (Commander / Adresse) ===== */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(10,14,40,.75);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:20px}
+.modal.open{opacity:1;visibility:visible}
+.box{background:#fff;border:4px solid var(--ink);border-radius:24px;padding:36px 30px;max-width:420px;width:100%;text-align:center;
+  box-shadow:10px 10px 0 var(--yellow);transform:scale(.8) rotate(-3deg);transition:transform .4s var(--ease);position:relative}
+.modal.open .box{transform:none}
+.box h3{font-family:'Bangers';font-size:2.4rem;color:var(--red);letter-spacing:2px;margin-bottom:10px;font-weight:400}
+.box .big{display:block;font-family:'Bangers';font-size:2.6rem;color:var(--navy);margin:8px 0 18px;text-decoration:none;letter-spacing:2px}
+.box p{margin-bottom:18px}
+.close{position:absolute;top:10px;right:16px;background:none;border:0;font-size:2rem;cursor:pointer;color:var(--ink)}
+.lightbox{cursor:zoom-out;overflow:auto;place-items:start center}
+.lightbox img{max-width:min(96vw,900px);height:auto;border-radius:12px;border:4px solid var(--yellow);transform:scale(.85);transition:transform .4s var(--ease)}
+.lightbox.open img{transform:none}
+
+footer{background:var(--ink);color:#bbb;text-align:center;padding:30px 20px;font-size:.9rem}
+footer b{color:var(--yellow)}
+
+@media(max-width:760px){
+  .cartes{grid-template-columns:1fr}
+  .hero{text-align:center}.hero p{margin-inline:auto}.cta{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#" class="brand title"><img src="img/logo.jpg" alt="Logo Via Pizza">VIA PIZZA</a>
+  <div class="hbtns">
+    <button class="btn" data-open="m-adresse">Adresse</button>
+    <button class="btn" data-open="m-commander">Commander</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg" role="img" aria-label="Intérieur du restaurant Via Pizza"></div>
+  <div class="wrap">
+    <span class="badge">Livraison Saint amand et ses alentours !</span>
+    <h1 class="title">LA FAIM ?<br><span>ON S'EN OCCUPE !</span></h1>
+    <p>Pizzas, kebabs, tacos, burgers, bowls… préparés à la minute à Saint-Amand-en-Puisaye.</p>
+    <div class="cta">
+      <a class="btn" href="#menu">La carte</a>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none"><path fill="#FFF6E3" d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,70 L0,70Z"/></svg>
+</section>
+
+<div class="marquee"><div>
+  <span>PIZZAS</span><span>KEBABS</span><span>TACOS</span><span>BURGERS</span><span>BOWLS</span><span>WINGS</span><span>FRITES</span><span>GLACES</span>
+  <span>PIZZAS</span><span>KEBABS</span><span>TACOS</span><span>BURGERS</span><span>BOWLS</span><span>WINGS</span><span>FRITES</span><span>GLACES</span>
+</div></div>
+
+<!-- ===== INFOS RAPIDES ===== -->
+<div class="infos">
+  <div class="reveal"><b>11h – 14h30</b><span>et 18h – 22h30</span></div>
+  <div class="reveal" style="transition-delay:.15s"><b>Fermé le lundi</b><span>Ouvert 6 jours sur 7</span></div>
+  <div class="reveal" style="transition-delay:.3s"><b>Livraison gratuite</b><span>dès 15 € à Saint-Amand</span></div>
+</div>
+
+<!-- ===== LA CARTE ===== -->
+<section id="menu" style="margin-top:60px">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2 class="title">LA CARTE</h2><p>Choisis une catégorie.</p></div>
+    <div class="promo reveal"><b>Nos pizzas dès 9,50 €</b>Junior 26 cm à 9,50 € · Senior 31 cm à 14,50 € · Méga 40 cm à 19,50 €</div>
+    <div class="tabs" id="tabs"></div>
+    <div id="panel"></div>
+    <p class="hint">Chèques-vacances et tickets restaurant acceptés. Prix relevés sur la carte papier du restaurant.</p>
+  </div>
+</section>
+
+<footer><b>Via Pizza</b> – 6 Route de Cosne, 58310 Saint-Amand-en-Puisaye · © <span id="year"></span></footer>
+
+<!-- ===== POP-UP COMMANDER ===== -->
+<div class="modal" id="m-commander" role="dialog" aria-modal="true" aria-label="Commander">
+  <div class="box"><button class="close" aria-label="Fermer">×</button>
+    <h3>COMMANDER</h3><p>Appelez-nous, on prépare tout de suite !</p>
+    <a class="big" href="tel:0386288574">03 86 28 85 74</a>
+    <a class="btn" href="tel:0386288574">Appeler</a>
+  </div>
+</div>
+
+<!-- ===== POP-UP ADRESSE ===== -->
+<div class="modal" id="m-adresse" role="dialog" aria-modal="true" aria-label="Adresse">
+  <div class="box"><button class="close" aria-label="Fermer">×</button>
+    <h3>ADRESSE</h3><p><b>6 Route de Cosne</b><br>58310 Saint-Amand-en-Puisaye</p>
+    <a class="btn" href="https://www.google.com/maps/search/?api=1&query=6+Route+de+Cosne+58310+Saint-Amand-en-Puisaye" target="_blank" rel="noopener">Itinéraire</a>
+  </div>
+</div>
+
+<!-- ===== AGRANDISSEMENT DE LA CARTE ===== -->
+<div class="modal lightbox" id="m-zoom"><img id="zoomImg" alt="Carte agrandie"></div>
+
+<script>
+/* Header qui change de style au scroll */
+const header = document.querySelector('header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 40));
+
+/* Pop-ups : tout bouton avec data-open="id" ouvre la fenêtre portant cet id */
+document.querySelectorAll('[data-open]').forEach(b =>
+  b.addEventListener('click', () => document.getElementById(b.dataset.open).classList.add('open')));
+
+/* Fermer : clic sur le fond, sur la croix, ou touche Échap */
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => {
+  if (e.target === m || e.target.classList.contains('close')) m.classList.remove('open');
+}));
+addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open')); });
+
+/* Agrandir une page de la carte d'origine (fermeture : clic n'importe où) */
+function openZoom(src){
+  document.getElementById('zoomImg').src = src;
+  const m = document.getElementById('m-zoom'); m.classList.add('open'); m.scrollTop = 0;
+}
+document.getElementById('m-zoom').addEventListener('click', e => e.currentTarget.classList.remove('open'));
+
+/* ============================================================
+   DONNÉES DE LA CARTE : pour changer un prix ou un nom, c'est ici.
+   ============================================================ */
+const T = 'Sauce tomate, fromage, ', C = 'Crème fraîche, fromage, ', B = 'Sauce barbecue, fromage, ';
+/* [fichier image, nom, ingrédients] */
+const PIZZAS = [
+  ['marguerita','Marguerita',T+'olives, origan'],['regina','Regina',T+'jambon, champignons'],
+  ['napolitaine','Napolitaine',T+'anchois, câpres, olives'],['paysanne','Paysanne',T+'lardons, oignons, crème fraîche, œuf'],
+  ['campione','Campione',T+'viande hachée, champignons, œuf, olives'],['calzone-soufflee','Calzone soufflée',T+'œuf, jambon ou thon ou viande hachée'],
+  ['vegetarienne','Végétarienne',T+'poivrons, artichauts, tomates fraîches, champignons'],['chef','Chef',T+'merguez, œuf'],
+  ['hawaienne','Hawaïenne',T+'jambon, ananas'],['4-saisons','4 Saisons',T+'jambon, champignons, artichauts, câpres, olives'],
+  ['orientale','Orientale',T+'merguez, poivrons, oignons, œuf'],['neptune','Neptune',T+'thon, poivrons, olives, œuf'],
+  ['americaine','Américaine',T+'jambon, chorizo, merguez, champignons, œuf'],['genova','Genova',T+'jambon, chorizo, bacon, lardons'],
+  ['chicken','Chicken',T+'poulet, oignons, pommes de terre'],['pescatore','Pescatore',T+'fruits de mer, persil, ail, citron'],
+  ['boursin','Boursin',T+'viande hachée, boursin, pommes de terre'],['4-fromages','4 Fromages',T+'camembert, gorgonzola, chèvre, fromage râpé'],
+  ['kebab','Kebab',T+'kebab, tomates fraîches, oignons, cheddar, olives'],['mexicaine','Mexicaine',T+'merguez, viande hachée, poivrons, œuf'],
+  ['gourmande','Gourmande',T+'merguez, poulet…'],['boisee','Boisée',C+'poulet, poivrons…'],
+  ['campagnarde','Campagnarde',C+'poulet, chèvre, champignons'],['rimini','Rimini',C+'poulet, gorgonzola, pommes de terre'],
+  ['5-fromages','5 Fromages',C+'camembert, chèvre, brie, gorgonzola, fromage râpé'],['tartiflette','Tartiflette',C+'lardons, reblochon, oignons, pommes de terre'],
+  ['saumon','Saumon',C+'saumon fumé, citron'],['texane','Texane',C+'viande hachée, chèvre, pommes de terre, oignons'],
+  ['royale','Royale',C+'poulet, boursin, pommes de terre, oignons'],['montagnarde','Montagnarde',C+'jambon, lardons, raclette, oignons, pommes de terre'],
+  ['fermiere','Fermière',C+'jambon, champignons, pommes de terre, œuf'],['chev-miel','Chev\'Miel',C+'fromage de chèvre, miel'],
+  ['indienne','Indienne','Sauce curry, fromage, poulet, poivrons, pommes de terre'],['barbecue','Barbecue',B+'viande hachée, chorizo, poivrons'],
+  ['cannibale','Cannibale',B+'viande hachée, merguez, poulet'],['best-off','Best-Off',B+'poulet, poulet fumé, champignons, poivrons']
+];
+/* [nom, description, prix seul, prix menu] — menu = avec frites + boisson 33 cl */
+const SANDWICHS = [
+  ['Kebab','Viande de kebab, fromage','8,00 €','9,00 €'],['Chicken Tikka','Poulet mariné au curry, fromage','8,00 €','9,00 €'],
+  ['Cordon bleu','Cordon bleu, fromage','8,00 €','9,00 €'],['Radical','Steak, cordon bleu, fromage','8,50 €','9,50 €'],
+  ['Suprême','2 steaks, bacon, œuf, fromage','8,50 €','9,50 €'],['Buffalo','Poulet, crème fraîche, champignons, œuf, raclette','8,50 €','9,50 €'],
+  ['Triple X','3 steaks, fromage','8,50 €','9,50 €'],['Américain','2 steaks, œuf, 2 fromages','8,00 €','9,00 €']
+];
+const BURGERS = [
+  ['Cheese','1 steak, fromage','6,00 €','7,00 €'],['Double Cheese','2 steaks, 2 fromages','7,00 €','8,00 €'],
+  ['Double Bacon','2 steaks, 2 bacon, 2 fromages','8,00 €','9,00 €'],['Royal Chicken','Tenders de poulet, salade, pommes de terre, fromage','8,50 €','9,50 €'],
+  ['Savoyard','2 steaks, cornichon, fromage à raclette','7,50 €','8,50 €'],['360','2 steaks 180 g, 2 fromages','12,00 €','13,00 €'],
+  ['Le Five','Salade, tomates, oignons, 5 steaks, 5 fromages, jambon, œuf','11,00 €','12,00 €'],['Le 720','2 burgers 360','23,50 €','24,50 €'],
+  ['La Grosse Faim','1 pizza Méga + 8 nuggets + frites + 1 boisson 33 cl','24,50 €','25,50 €'],
+  ['La Mega Box','50 wings + 4 portions de frites + 1 maxi boisson 1,5 L',null,'55,00 €']
+];
+const TACOS = [['Tacos M','1 viande','9,00 €'],['Tacos L','2 viandes','10,50 €'],['Tacos XL','3 viandes','13,00 €']];
+const BOWLS = [['Bowl M','1 viande','9,50 €'],['Bowl L','2 viandes','11,00 €']];
+const ASSIETTES = [['Kebab','','14,00 €'],['Chicken','','14,50 €'],['Steak','','14,50 €'],['Mixte','2 viandes au choix','16,00 €']];
+
+/* ---- PHOTOS : découpe d'une zone dans l'image d'une page de la carte ----
+   crop(image, largeur, hauteur, x, y, w, h) : (x,y,w,h) = zone à montrer, en pixels de l'image.
+   La zone est élargie au format 16/10 pour remplir la vignette sans déformer. */
+function crop(src, IW, IH, x, y, w, h){
+  const r = 1.6;
+  if (w / h < r) { const nw = h * r; x -= (nw - w) / 2; w = nw; } else { const nh = w / r; y -= (nh - h) / 2; h = nh; }
+  if (w > IW) { w = IW; h = w / r; } if (h > IH) { h = IH; w = h * r; }
+  x = Math.max(0, Math.min(IW - w, x)); y = Math.max(0, Math.min(IH - h, y));
+  const px = IW > w ? x / (IW - w) * 100 : 0, py = IH > h ? y / (IH - h) * 100 : 0;
+  return `<div class="bg" style="background-image:url(${src});background-size:${IW / w * 100}% ${IH / h * 100}%;background-position:${px}% ${py}%"></div>`;
+}
+const S = (x,y,w,h) => crop('image/sandwichs.png',1377,1275,x,y,w,h);
+const G = (x,y,w,h) => crop('image/burgers.png',1377,1875,x,y,w,h);
+const TAC = crop('image/tacos.png',1038,1455,30,380,860,490);
+const BOW = crop('image/bowls.png',1038,852,225,260,670,495);
+const A1 = crop('image/assiettes.png',1038,834,440,205,500,295), A2 = crop('image/assiettes.png',1038,834,495,510,490,280);
+const PHOTO = {
+  'Sandwichs|Kebab':S(450,325,430,175),'Sandwichs|Chicken Tikka':S(890,350,460,150),'Sandwichs|Cordon bleu':S(40,680,420,140),
+  'Sandwichs|Radical':S(490,680,430,155),'Sandwichs|Suprême':S(940,675,430,165),'Sandwichs|Buffalo':S(20,1030,430,140),
+  'Sandwichs|Triple X':S(490,1045,430,130),'Sandwichs|Américain':S(945,1040,430,135),
+  'Burgers|Cheese':G(10,410,250,156),'Burgers|Double Cheese':G(275,405,250,156),'Burgers|Double Bacon':G(540,405,250,156),
+  'Burgers|Royal Chicken':G(810,405,265,166),'Burgers|Savoyard':G(315,750,375,245),'Burgers|360':G(900,750,477,245),
+  'Burgers|Le Five':G(20,1150,680,270),'Burgers|Le 720':G(725,1085,652,315),'Burgers|La Grosse Faim':G(0,1590,700,240),
+  'Burgers|La Mega Box':G(850,1470,527,405),
+  'Tacos|Tacos M':TAC,'Tacos|Tacos L':TAC,'Tacos|Tacos XL':TAC,'Bowls|Bowl M':BOW,'Bowls|Bowl L':BOW,
+  'Assiettes|Kebab':A1,'Assiettes|Steak':A1,'Assiettes|Chicken':A2,'Assiettes|Mixte':A2
+};
+let curCat = '';
+
+const price = (lbl, v, cls='') => v ? `<span class="${cls}"><em>${lbl}</em>${v}</span>` : '';
+const textCard = (c, name, desc, prices) => `<div class="item text" style="--c:${c}"><div class="ph">${PHOTO[curCat+'|'+name]||''}</div><div class="body"><h3>${name}</h3>${desc?`<p>${desc}</p>`:''}<div class="prices">${prices}</div></div></div>`;
+const head = (txt, img) => `<div class="panel-head"><p>${txt}</p><button class="btn small" data-zoom="${img}">Voir la page de la carte</button></div>`;
+
+/* Une fonction par catégorie : elle renvoie le HTML du panneau */
+const CATS = {
+  'Pizzas': () => head('Pâte fraîche. Une pizza se commande en 3 tailles.', 'image/pizzas.png') +
+    `<div class="sizes"><div class="size"><small>Junior 26 cm</small><b>9,50 €</b></div><div class="size"><small>Senior 31 cm</small><b>14,50 €</b></div><div class="size"><small>Méga 40 cm</small><b>19,50 €</b></div></div>
+     <div class="grid">${PIZZAS.map(([f,n,i],k)=>`<div class="item" style="animation-delay:${Math.min(k,12)*40}ms"><div class="ph"><img src="image/pizzas/pizza-${f}.png" alt="Pizza ${n}" loading="lazy"></div>
+       <div class="body"><h3>${n}</h3><p>${i}</p>${f==='marguerita'?'<div class="prices"><span><em>Junior</em>7,00 €</span><span><em>Senior</em>10,00 €</span><span><em>Méga</em>13,00 €</span></div>':''}</div></div>`).join('')}</div>
+     <div class="extras"><b>Ingrédient supplémentaire :</b> Junior 1,50 € · Senior 2,00 € · Méga 2,50 €</div>`,
+  'Sandwichs': () => head('Pain maison ou tortilla, salade, tomates, oignons et sauce au choix : harissa, samouraï, ketchup, mayo, blanche, américaine, algérienne, biggy, barbecue.', 'image/sandwichs.png') +
+    `<div class="grid">${SANDWICHS.map(([n,d,s,m])=>textCard('#E4002B',n,d,price('Seul',s)+price('Menu',m,'menu'))).join('')}</div>
+     <div class="extras"><b>Menu</b> = sandwich + frites + 1 boisson 33 cl.</div>`,
+  'Tacos': () => head('Frites à l\'intérieur, sauce fromagère et 1 boisson 33 cl. Viande au choix.', 'image/tacos.png') +
+    `<div class="grid">${TACOS.map(([n,d,p])=>textCard('#FF6B1A',n,d,price('',p,'menu'))).join('')}</div>
+     <div class="extras"><b>Viandes :</b> viande hachée, nuggets, tenders, kebab, cordon bleu, merguez, poulet.<br>
+     <b>Supplément fromage 1,00 € :</b> chèvre, boursin, mozza, raclette, cheddar. <b>Charcuterie 1,50 € :</b> bacon, jambon, lardons.<br>
+     <b>Gratine ton tacos 2,00 € :</b> raclette, cheddar, chèvre, emmental.</div>`,
+  'Burgers': () => head('Servis avec salade, tomates, oignons. Le menu comprend frites et boisson 33 cl.', 'image/burgers.png') +
+    `<div class="grid">${BURGERS.map(([n,d,s,m])=>textCard('#1FA45B',n,d,price('Seul',s)+price('Menu',m,'menu'))).join('')}</div>`,
+  'Bowls': () => head('Frites, sauce fromagère et viande au choix.', 'image/bowls.png') +
+    `<div class="grid">${BOWLS.map(([n,d,p])=>textCard('#FFA800',n,d,price('',p,'menu'))).join('')}</div>
+     <div class="extras"><b>Supplément viande :</b> 1,50 € · <b>Gratine ton bowl 2,00 € :</b> raclette, cheddar, chèvre, emmental.</div>`,
+  'Assiettes': () => head('Salade, tomates, oignons et sauce au choix.', 'image/assiettes.png') +
+    `<div class="grid">${ASSIETTES.map(([n,d,p])=>textCard('#2E7DFF',n,d,price('',p,'menu'))).join('')}</div>`
+};
+
+const tabsEl = document.getElementById('tabs'), panel = document.getElementById('panel');
+function show(cat){
+  curCat = cat;
+  panel.innerHTML = CATS[cat]();
+  panel.querySelectorAll('[data-zoom]').forEach(b => b.addEventListener('click', () => openZoom(b.dataset.zoom)));
+}
+Object.keys(CATS).forEach((cat, k) => {
+  const b = document.createElement('button');
+  b.className = 'tab' + (k === 0 ? ' active' : ''); b.textContent = cat;
+  b.addEventListener('click', () => { tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); b.classList.add('active'); show(cat); });
+  tabsEl.appendChild(b);
+});
+show('Pizzas');
+
+/* Apparition au scroll */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+}), {threshold: .15});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
