@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Via Pizza Champignelles</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f3f4;--card:#fff;--ink:#202124;--sub:#5f6368;--line:#e8eaed;--blue:#1a73e8;--green:#188038;--star:#fbbc04;--chip:#e8f0fe;--onblue:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131314;--card:#1f1f1f;--ink:#e8eaed;--sub:#9aa0a6;--line:#3c4043;--blue:#8ab4f8;--green:#81c995;--chip:#2a3a55;--onblue:#202124;color-scheme:dark}}:root[data-theme="dark"]{--bg:#131314;--card:#1f1f1f;--ink:#e8eaed;--sub:#9aa0a6;--line:#3c4043;--blue:#8ab4f8;--green:#81c995;--chip:#2a3a55;--onblue:#202124;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 Roboto,Arial,sans-serif;display:flex;justify-content:center;padding-block:16px 24px;padding-inline:0}@media(min-width:460px){body{padding-inline:16px}}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.card{width:100%;max-width:408px;background:var(--card);border-radius:16px;box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 12px rgba(60,64,67,.15);overflow:hidden}
+.photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:210px}
+.ph{position:relative;background-size:cover;background-position:center;cursor:pointer;display:block;width:100%;height:100%}
+.ph.big{grid-row:1/3}
+.ph small{position:absolute;right:8px;bottom:6px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:3px 9px;border-radius:10px}
+.logo{position:absolute;left:10px;bottom:10px;width:52px;height:52px;border-radius:50%;border:2px solid #fff;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.body{padding:16px 18px 4px}
+h1{font:400 24px/1.25 Roboto}
+.rate{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.rate b{font-weight:500}
+.stars{color:var(--star);letter-spacing:1px;font-size:15px}
+.link{color:var(--blue);text-decoration:none;cursor:pointer}
+.cat{color:var(--sub);margin-top:2px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{background:var(--chip);color:var(--blue);font-weight:500;padding:5px 12px;border-radius:99px;font-size:13px}
+.status{margin-top:12px}.status b,.ok{color:var(--green);font-weight:500}
+.actions{display:flex;justify-content:space-between;padding:16px 8px 14px;border-bottom:1px solid var(--line);margin-top:6px}
+.act{flex:1;text-align:center;color:var(--blue);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer}
+.act i{display:grid;place-items:center;width:44px;height:44px;margin:0 auto 6px;border-radius:50%;border:1px solid var(--line);font-style:normal;font-size:18px;transition:background .15s}
+.act:hover i{background:var(--chip)}
+.act.main i{background:var(--blue);color:var(--onblue);border-color:var(--blue)}
+.act.on i{background:var(--chip)}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;padding:13px 0;font-weight:500;color:var(--sub);font-size:13px}
+.tabs button.on{color:var(--blue);box-shadow:inset 0 -3px var(--blue)}
+.row{display:flex;gap:18px;padding:13px 18px;align-items:flex-start}
+.row .ic{width:22px;text-align:center;color:var(--blue);font-size:17px}
+.sec{padding:16px 18px;border-top:8px solid var(--bg)}
+.sec h2{font:500 16px Roboto;margin-bottom:12px}
+.more{color:var(--blue);font-weight:500;margin-top:10px;display:block}
+.menu{display:flex;gap:10px;overflow:auto;padding-bottom:4px;scroll-snap-type:x proximity}
+.dish{min-width:136px;text-align:left;scroll-snap-align:start}
+.dish .th{height:104px;border-radius:10px;background-size:cover;background-position:top center;border:1px solid var(--line)}
+.dish b{display:block;margin-top:6px;font-weight:500;line-height:1.25}.dish span{color:var(--sub);font-size:13px}
+.post{display:flex;gap:12px;background:var(--bg);border-radius:12px;padding:12px}
+.post .em{font-size:34px}.post b{font-weight:500}.post p{color:var(--sub);font-size:13px}
+.big-r{display:flex;gap:18px;align-items:center}
+.big-r strong{font:400 48px/1 Roboto}
+.rv{padding:14px 0;border-top:1px solid var(--line)}
+.rv .who{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.av{width:32px;height:32px;border-radius:50%;color:#fff;display:grid;place-items:center;font-weight:500}
+.rv small,.sub{color:var(--sub)}
+.tag{font-size:10.5px;color:var(--sub);border:1px dashed var(--line);border-radius:6px;padding:1px 6px;margin-left:6px;font-weight:400;vertical-align:middle}
+.reply{margin:8px 0 0 6px;padding:8px 0 4px 12px;border-left:3px solid var(--line)}.reply b{font-weight:500}.reply p{color:var(--sub);font-size:13px}
+.ext{display:flex;flex-direction:column}.ext a{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none}.ext a:first-child{border-top:0}.ext a span{color:var(--sub);font-size:12px}.ext a:after{content:"↗";color:var(--blue)}
+.cta{display:flex;gap:10px;padding:16px 18px 20px}
+.cta a{flex:1;text-align:center;padding:11px;border-radius:99px;border:1px solid var(--line);color:var(--blue);font-weight:500;text-decoration:none;cursor:pointer}
+.cta a.p{background:var(--blue);color:var(--onblue);border-color:var(--blue)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mgrid .th{height:190px;border-radius:12px;background-size:cover;background-position:top center;border:1px solid var(--line)}
+.mgrid b{display:block;margin-top:4px;font-weight:500;font-size:13px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:13px}
+.note{max-width:408px;margin:12px auto 0;text-align:center;color:var(--sub);font-size:12px}
+/* Galerie plein écran */
+.ov{position:fixed;inset:0;z-index:50;background:var(--card);overflow:auto}
+.ov header{position:sticky;top:0;background:var(--card);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);z-index:1}
+.ov header h3{font:500 18px Roboto;flex:1}
+.x{width:40px;height:40px;border-radius:50%;font-size:22px}.x:hover{background:var(--bg)}
+.gf{display:flex;gap:8px;padding:12px 16px;flex-wrap:wrap}
+.gf button{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px}
+.gf button.on{background:var(--chip);color:var(--blue);border-color:transparent;font-weight:500}
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;padding:0 16px 24px;max-width:900px;margin:0 auto}
+.gg button{aspect-ratio:1;background-size:cover;background-position:center;border-radius:8px}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.94);display:flex;flex-direction:column;color:#fff}
+.lb .top{display:flex;justify-content:space-between;align-items:center;padding:10px 16px}
+.lb .top .x{color:#fff}.lb .top .x:hover{background:rgba(255,255,255,.15)}
+.lb .stage{flex:1;overflow:auto;display:grid;place-items:center;padding:0 56px;touch-action:pan-x pan-y pinch-zoom}
+.lb img{max-width:100%;max-height:calc(100vh - 120px);object-fit:contain;cursor:zoom-in}
+.lb img.z{max-height:none;max-width:none;width:160%;cursor:zoom-out}
+.lb .stage.zoomed{display:block}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px}
+.nav:hover{background:rgba(255,255,255,.3)}.nav.l{left:8px}.nav.r{right:8px}
+.cap{text-align:center;padding:10px 16px 18px;font-size:14px}
+.copy{border:1px solid var(--line);color:var(--blue);border-radius:99px;padding:6px 14px;font-weight:500;font-size:13px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#323232;color:#fff;padding:12px 20px;border-radius:8px;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+</style>
+</head>
+<body>
+<div>
+<div class="card">
+  <div class="photos">
+    <button class="ph big" data-open="0" style="background-image:url(devanture.jpg)" aria-label="Voir les photos"><img class="logo" src="logo.jpg" alt="Logo Via Pizza"></button>
+    <button class="ph" data-open="1" style="background-image:url(zoom-pizza.jpg)" aria-label="Pizza"></button>
+    <button class="ph" data-open="2" style="background-image:url(zoom-tacos.jpg)" aria-label="Voir plus de photos"><small>📷 Voir les photos</small></button>
+  </div>
+
+  <div class="body">
+    <h1>Via Pizza</h1>
+    <div class="rate"><b class="avg"></b><span class="stars">★★★★★</span><a class="link" data-tab="avis">(<span class="cnt"></span>)</a><span class="sub">· €10–20</span></div>
+    <div class="cat">Pizzeria · Restauration rapide</div>
+    <div class="badges"><span class="badge">🛍️ À emporter</span><span class="badge">🛵 Livraison</span></div>
+    <div class="status" id="st"></div>
+  </div>
+
+  <div class="actions">
+    <a class="act main" href="tel:+33386742472"><i>📞</i>Appeler</a>
+    <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=10+avenue+Grosse+Pierre+89350+Champignelles"><i>➤</i>Itinéraire</a>
+    <button class="act" id="save"><i>🔖</i><span>Enregistrer</span></button>
+    <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=restaurants+pr%C3%A8s+de+10+avenue+Grosse+Pierre+89350+Champignelles"><i>📍</i>À proximité</a>
+    <button class="act" id="share"><i>↗</i>Partager</button>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button class="on" data-tab="vue">Vue d'ensemble</button><button data-tab="menu">Menu</button><button data-tab="avis">Avis</button><button data-tab="about">À propos</button>
+  </nav>
+
+  <!-- VUE D'ENSEMBLE -->
+  <div data-panel="vue">
+    <div class="row"><span class="ic">📍</span><div>10 avenue Grosse Pierre, 89350 Champignelles<br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=10+avenue+Grosse+Pierre+89350+Champignelles">Voir sur la carte</a></div></div>
+    <div class="row"><span class="ic">🕑</span><div><span id="st2"></span><div class="sub" style="margin-top:4px">Mardi au dimanche : 11:00–14:30 et 18:00–22:30<br>Lundi : fermé</div></div></div>
+    <div class="row"><span class="ic">📞</span><div style="flex:1"><a class="link" href="tel:+33386742472" style="font-size:18px;font-weight:500;user-select:all">03 86 74 24 72</a><br><span class="sub">Touchez pour appeler</span></div><button class="copy" id="copy">Copier</button></div>
+    <div class="row"><span class="ic">✔</span><div>Informations mises à jour par l'établissement</div></div>
+
+    <div class="sec">
+      <h2>Avis</h2>
+      <div class="big-r"><strong class="avg"></strong><div><div class="stars" style="font-size:18px">★★★★★</div><small class="sub"><span class="cnt"></span> avis Google</small></div></div>
+      <div id="rv-short"></div>
+      <a class="more link" data-tab="avis">Voir tous les avis</a>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <div data-panel="menu" hidden>
+    <div class="sec" style="border-top:0">
+      <h2>La carte</h2>
+      <div class="mgrid" id="mgrid"></div>
+      <p class="sub" style="margin-top:12px">Touchez une page pour l'agrandir.</p>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <div data-panel="avis" hidden>
+    <div class="sec" style="border-top:0">
+      <div class="big-r"><strong class="avg"></strong><div><div class="stars" style="font-size:18px">★★★★★</div><small class="sub"><span class="cnt"></span> avis Google</small></div></div>
+      <div id="rv-all"></div>
+      <p class="sub" style="margin-top:10px;font-size:12px">Les avis ne sont pas vérifiés · Source : Google · Texte coupé par Google quand il se termine par « … »</p>
+    </div>
+  </div>
+
+  <!-- A PROPOS -->
+  <div data-panel="about" hidden>
+    <div class="sec" style="border-top:0">
+      <h2>À propos</h2>
+      <p>Pizzeria et restauration rapide à Champignelles (Yonne). Pizzas, tacos, kebabs, burgers et paninis, à emporter ou en livraison.</p>
+    </div>
+    <div class="sec"><h2>Services</h2><div class="chips"><span>Terrasse</span><span>Chaises hautes</span><span>À emporter</span><span>Livraison</span></div><p class="sub" style="margin-top:8px;font-size:12px">Terrasse et chaises hautes : fiche Google. Livraison et à emporter : signalés par les clients.</p></div>
+    <div class="sec"><h2>Retrouvez Via Pizza ailleurs</h2><div class="ext">
+      <a href="https://www.facebook.com/people/via-pizza-champignelles/61565831100089/" target="_blank" rel="noopener"><div><b style="font-weight:500">Facebook</b><br><span>via pizza champignelles</span></div></a>
+      <a href="https://www.pagesjaunes.fr/pros/63746847" target="_blank" rel="noopener"><div><b style="font-weight:500">Pages Jaunes</b><br><span>Fiche annuaire</span></div></a>
+      <a href="https://fr.mappy.com/poi/67b0060a2066c3101cdc2939" target="_blank" rel="noopener"><div><b style="font-weight:500">Mappy</b><br><span>Plan et itinéraire</span></div></a>
+      <a href="https://annuaire-entreprises.data.gouv.fr/etablissement/93277279100012" target="_blank" rel="noopener"><div><b style="font-weight:500">Annuaire des Entreprises</b><br><span>Fiche officielle (data.gouv.fr)</span></div></a>
+    </div></div>
+    <div class="sec"><h2>Infos pratiques</h2>
+      <p>🕑 Mardi au dimanche · 11:00–14:30 et 18:00–22:30 · Fermé le lundi</p>
+      <p style="margin-top:6px">💶 €10–20 par personne</p>
+      <p style="margin-top:6px">📍 10 avenue Grosse Pierre, 89350 Champignelles</p>
+      <p style="margin-top:6px">📞 03 86 74 24 72</p></div>
+  </div>
+
+  <div class="cta"><a class="p" href="tel:+33386742472">Appeler</a><a id="review" target="_blank" rel="noopener" href="https://share.google/TsbVciqNYgrvsnZn2">Écrire un avis</a></div>
+</div>
+<p class="note">Maquette de fiche Google · note et nombre d'avis : Google (4,7 sur 48 avis) · seuls les avis recopiés sont listés</p>
+</div>
+
+<!-- Galerie -->
+<div class="ov" id="gallery" hidden>
+  <header><button class="x" data-close="gallery" aria-label="Fermer">←</button><h3>Photos</h3></header>
+  <div class="gf" id="gf"><button class="on" data-f="all">Tout</button><button data-f="etab">Établissement</button><button data-f="plats">Plats</button><button data-f="menu">Menu</button></div>
+  <div class="gg" id="gg"></div>
+</div>
+<!-- Visionneuse -->
+<div class="lb" id="lb" hidden>
+  <div class="top"><span id="lbn"></span><button class="x" id="lbx" aria-label="Fermer">✕</button></div>
+  <div class="stage" id="stage"><img id="lbi" alt=""></div>
+  <button class="nav l" id="prev" aria-label="Précédente">‹</button><button class="nav r" id="next" aria-label="Suivante">›</button>
+  <div class="cap" id="cap"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const PH=[
+ {s:"devanture.jpg",c:"Façade",g:"etab"},{s:"zoom-pizza.jpg",c:"Nos pizzas",g:"plats"},
+ {s:"zoom-tacos.jpg",c:"Nos tacos",g:"plats"},{s:"zoom-box.jpg",c:"Nos box",g:"plats"},
+ {s:"menu-0-couverture.jpg",c:"Menu · Couverture",g:"menu"},
+ {s:"Bete%20de%20Menu.jpg",c:"Menu · Pizzas",g:"menu"},
+ {s:"menu-1-salades-pates-escalopes.jpg",c:"Menu · Salades, pâtes, escalopes",g:"menu"},
+ {s:"menu-2-box-offres-desserts.jpg",c:"Menu · Box, offres, desserts",g:"menu"},
+ {s:"menu-4-tacos-sandwichs-burgers.jpg",c:"Menu · Tacos, sandwichs, burgers",g:"menu"}
+];
+const idx=src=>PH.findIndex(p=>p.s===src);
+const MENUS=[
+ ["Bete%20de%20Menu.jpg","Pizzas"],
+ ["menu-1-salades-pates-escalopes.jpg","Salades · Pâtes · Escalopes"],
+ ["menu-2-box-offres-desserts.jpg","Box · Offres · Desserts"],
+ ["menu-4-tacos-sandwichs-burgers.jpg","Tacos · Sandwichs · Burgers"]
+];
+const toast=m=>{const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)};
+
+/* Onglets */
+function tab(n){
+  $$("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==n);
+  $$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===n));
+  $("#tabs").scrollIntoView({block:"nearest"});
+}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){e.preventDefault();tab(t.dataset.tab)}});
+
+/* Plats populaires + page menu (images du dossier Menus_web) */
+$("#mgrid").innerHTML=MENUS.map(([s,n])=>`<button data-open="${idx(s)}"><div class="th" style="background-image:url(${s})"></div><b>${n}</b></button>`).join("");
+
+/* Avis (exemples) */
+const RV=[["Marie-Adeline HATON", "#00897b", "il y a 5 mois", "Visité en mai", "Commande aujourd’hui, nous avons choisi de nous faire livrer à notre domicile, accueil agréable, livraison très rapide, et nous nous sommes vraiment régalés . …", "", 5], ["Murielle Leencknegt", "#6d4c41", "il y a 5 mois", "Visité en avril", "Pate à pizza faite maison, très bien garnie. Panini fait maison, également très bien garni et accompagné de frites, accueil chaleureux. …", "", 5], ["Valentine L", "#f9a825", "il y a 5 mois", "Visité en mai", "J’ai l’habitude de commander et d’aller chercher sur place. Franchement jamais déçue. J’ai goûté leur nouveauté « Les Bowls » et franchement c’est super délicieux ! Je recommande !…", "", 4], ["Cédric Scheurmann", "#ec407a", "il y a 2 mois", "Visité en juillet", "Annonce des prix qui ne sont pas vrai, s’en fou royal du client. Tu peux rester 30 minutes au téléphone avec que la personne n’a toujours rien compris…", "", 1], ["Zero Rider", "#d84315", "il y a 1 an", "Visité en décembre 2024", "Enfin un bon kebab dans la région ! Premier bon point: livre dans un large rayon ( je suis à plus de 15kms). Personnel compétent, sur 3 commandes, jamais la …", "", 5], ["Didem Akay", "#5d4037", "il y a 2 ans", "Visité en octobre 2024", "Je voyais cette pizzeria tous les jours après le travail j’ai enfin décidé à tenter l’expérience. Je ne regrette pas du tout. C’est très très bon. Je recommande fortement et j’y retournerai avec plaisir, un accueil vraiment chaleureux…", "", 5], ["Pat Boizard", "#ef6c00", "il y a 1 an", "Visité en octobre 2024", "C'est la deuxième commande est C'est vraiment toujours aussi bon et un très bon accueil cela fait plaisir . …", "", 5], ["Guy Dubois", "#5e35b1", "il y a 1 an", "Visité en novembre 2024", "Quantité restreint j ai dû avoir pour en gros 10 frites viande kebab mini alors que j avais pris Tacos 3 viandes je pense que comme c est le début …", "", 3], ["Aurelie Piard Delpierre", "#2e7d32", "il y a 1 an", "Visité en décembre 2024", "Au top ! Commandé plusieurs fois en livraison et jamais déçu ! Pizza, panini, kebab, tacos, burger, tout testé et c'est parfait !…", "", 5], ["SCOBA LEMALFRA", "#8e24aa", "Modifié il y a 1 an", "Visité en octobre 2024", "Le choix est là la carte est très grande , Livraison super rapide , la commande est servie également très rapidement et …", "", 5], ["Ophelie Limage", "#c2185b", "il y a 1 an", "Visité en octobre 2024", "Très accueillant, toujours avec le sourire , le service est génial, super bon en plus pas chère c'est vraiment génial. Merci beaucoup pour votre gentillesse…", "", 5], ["Emilie Girault", "#1565c0", "il y a 1 an", "", "Première expérience décevante, avec 45 minutes de retard sur l'heure de livraison prevue, une réduction sur la note aurait été un geste bien accueilli.…", "", 2], ["tjxbox", "#558b2f", "il y a 1 an", "Visité en octobre 2024", "1er commande en livraison parfait ! C’est arrivé bien chaud ont c’est régaler. Ont reviendra…", "", 5], ["Sigrid RS", "#00838f", "il y a 1 an", "Visité en septembre 2024", "Très bonne pizza, la pâte est super. Possibilité de faire les burger en végétarien et ca c'est vraiment top ! …", "", 5], ["Sebastien Massaro", "#00897b", "il y a 1 an", "Visité en juin 2025", "Un vrai petit coin de vie à la campagne. Depuis que je me suis installé ici il y a six mois, je viens régulièrement dans …", "", 5], ["joce", "#6d4c41", "il y a 1 an", "Visité en février 2025", "Pizzas excellentes bon accueil téléphonique et sur place à refaire pizzas commandées à emporter établissement visité le 4 février…", "", 5], ["Alex Ds", "#f9a825", "il y a 1 an", "Visité en août 2025", "Première commande aujourd’hui et j’en suis vraiment ravie On a commandé une pizza, des sandwichs ( kebab, triple x, chicken tikka ) et un tacos, ils étaient tous bons…", "", 5], ["Mathis bourgeois", "#ec407a", "il y a 1 an", "Visité en mai 2025", "Excellent je vous le conseille pizza excellente et un agréable accueil…", "", 5], ["Lacrilex Gaming", "#d84315", "il y a 2 ans", "Visité en octobre 2024", "Commande arrivée chaude, prix raisonnable, nous nous sommes régalés, les enfants sont ravis. Merci !…", "", 5], ["Andrise ALTENOR", "#5d4037", "il y a 1 an", "Visité en juillet 2025", "Bonne petite pizzeria, très bonne accueil, chaleureux, gentil et pizzas, tacos, burger, tout était très bon. …", "", 5], ["Vanessa Faussey", "#ef6c00", "il y a 1 an", "Visité en novembre 2024", "Accueillant, souriant, une super ambiance et surtout c est super bon!…", "", 5], ["Rami Msa", "#5e35b1", "il y a 1 an", "Visité en mai 2025", "Première commande et franchement pas déçu très bonne adresse…", "", 5], ["jonathan lemaire", "#2e7d32", "il y a 2 ans", "Visité en octobre 2024", "Hyper réactif et super sympathique bonne pizzeria 😊…", "", 5], ["Rafik Zarzis", "#8e24aa", "il y a 1 an", "Visité en décembre 2024", "Super goût et Super accueil 👍 Merci et à la prochaine 😉…", "", 5], ["Bali Balo", "#c2185b", "il y a 1 an", "Visité en avril 2025", "Super très bonne accueil très bon rien à dire…", "", 4], ["Gwendoline Vinche", "#1565c0", "il y a 2 ans", "Visité en octobre 2024", "Pizzeria au top 👌 responsable super sympathique et marrant😊…", "", 5], ["Nahel MARTIN", "#558b2f", "il y a 1 an", "Visité en avril 2025", "pizza très bonne et qui cale bien !…", "", 5], ["Gui Tavares", "#00838f", "il y a 1 an", "Visité en juin 2025", "Nourriture délicieuse , allez y les yeux fermés ….", "", 5], ["Juanito M", "#00897b", "il y a 1 an", "Visité en juillet 2025", "Bonnes pizzas et bon kebab. A refaire…", "", 5], ["eric vallee", "#6d4c41", "il y a 1 an", "Visité en février 2025", "Sympa ,rapide ,bonne…", "", 5], ["Laetitia Levrat", "#f9a825", "il y a 1 an", "Visité en janvier 2025", "Excellent commande régulièrement…", "", 5], ["Fabien Petit", "#ec407a", "il y a 6 mois", "Visité en mars", "À emporter…", "", 5], ["raf kad", "#d84315", "il y a 1 an", "Visité en février 2025", "Bonne adresse…", "", 5], ["Uriel Guidance", "#5d4037", "il y a 1 mois", "Visité en septembre", "Paninis et kebab très bon. Merci nos papilles se sont régalées. 😀…", "", 5], ["Dwen Ryss", "#ef6c00", "il y a 1 mois", "Visité en août", "On dirait la version ‘expérience premium’ où le premium, c’est surtout le prix. Les tacos goût ‘surprise en promo’, la fraîcheur façon roulette russe et …", "", 1], ["Paul Becsi", "#5e35b1", "il y a 2 mois", "Visité en août", "", "", 5], ["Olivier B", "#2e7d32", "il y a 2 mois", "Visité en juillet", "", "", 5]];
+const rv=a=>a.map(([n,c,d,v,t,r,s])=>`<div class="rv"><div class="who"><div class="av" style="background:${c}">${n[0]}</div><div><b style="font-weight:500">${n}</b><br><small>${d}${v?" · "+v:""}</small></div></div><div class="stars">${"★".repeat(s)}<span style="color:var(--line)">${"★".repeat(5-s)}</span></div>${t?`<p>${t}</p>`:""}${r?`<div class="reply"><b>Via pizza (propriétaire)</b><p>${r}</p></div>`:""}</div>`).join("");
+$("#rv-short").innerHTML=rv(RV.slice(0,3));$("#rv-all").innerHTML=rv(RV);
+$$(".avg").forEach(e=>e.textContent="4,7");$$(".cnt").forEach(e=>e.textContent="48");
+
+/* Galerie */
+function grid(f){
+  $("#gg").innerHTML=PH.map((p,i)=>(f==="all"||p.g===f)?`<button data-open="${i}" style="background-image:url(${p.s})" aria-label="${p.c}"></button>`:"").join("");
+  $$("#gf button").forEach(b=>b.classList.toggle("on",b.dataset.f===f));
+}
+let cur=0;
+function show(i){
+  cur=(i+PH.length)%PH.length;const p=PH[cur];
+  $("#lbi").src=p.s;$("#lbi").alt=p.c;$("#lbi").classList.remove("z");$("#stage").classList.remove("zoomed");
+  $("#cap").textContent=p.c;$("#lbn").textContent=(cur+1)+" / "+PH.length;
+}
+const openLb=i=>{show(i);$("#lb").hidden=false};
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]");
+  if(o){const i=+o.dataset.open;
+    if(o.closest(".photos")&&i!==0&&i!==1){grid("all");$("#gallery").hidden=false}   // vignette « Voir les photos »
+    else openLb(i);
+    return}
+  const c=e.target.closest("[data-close]");if(c)$("#"+c.dataset.close).hidden=true;
+  const f=e.target.closest("#gf button");if(f)grid(f.dataset.f);
+});
+$("#lbx").onclick=()=>$("#lb").hidden=true;
+$("#prev").onclick=()=>show(cur-1);$("#next").onclick=()=>show(cur+1);
+$("#lbi").onclick=e=>{const z=e.target.classList.toggle("z");$("#stage").classList.toggle("zoomed",z)};
+document.addEventListener("keydown",e=>{
+  if(!$("#lb").hidden){if(e.key==="Escape")$("#lb").hidden=true;if(e.key==="ArrowLeft")show(cur-1);if(e.key==="ArrowRight")show(cur+1)}
+  else if(!$("#gallery").hidden&&e.key==="Escape")$("#gallery").hidden=true;
+});
+let x0=null;
+$("#stage").addEventListener("touchstart",e=>x0=e.touches[0].clientX,{passive:true});
+$("#stage").addEventListener("touchend",e=>{if(x0===null||$("#lbi").classList.contains("z"))return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)show(cur+(d<0?1:-1));x0=null});
+$$(".photos .ph")[0].onclick=null;
+// la grande photo et l'intérieur ouvrent la visionneuse ; la 3e ouvre la galerie
+grid("all");
+
+/* Enregistrer */
+let saved=false;try{saved=localStorage.getItem("via-saved")==="1"}catch(e){}
+const paintSave=()=>{$("#save").classList.toggle("on",saved);$("#save span").textContent=saved?"Enregistré":"Enregistrer"};
+paintSave();
+$("#save").onclick=()=>{saved=!saved;try{localStorage.setItem("via-saved",saved?"1":"0")}catch(e){}paintSave();toast(saved?"Via Pizza enregistré dans vos lieux":"Retiré de vos lieux")};
+
+/* Partager */
+$("#share").onclick=async()=>{
+  const url="https://share.google/TsbVciqNYgrvsnZn2";
+  if(navigator.share){try{await navigator.share({title:"Via Pizza",text:"Via Pizza – Champignelles",url});return}catch(e){if(e.name==="AbortError")return}}
+  try{await navigator.clipboard.writeText(url);toast("Lien copié")}catch(e){prompt("Copiez le lien :",url)}
+};
+/* Appeler : le lien tel: peut ne rien faire selon l'appareil, donc le numéro est copié et affiché */
+const TEL="03 86 74 24 72";
+const copyTel=async()=>{try{await navigator.clipboard.writeText(TEL);return true}catch(e){return false}};
+$("#copy").onclick=async()=>toast(await copyTel()?"Numéro copié : "+TEL:"Numéro : "+TEL);
+
+/* Statut d'ouverture (heure de Paris) : mar-dim 11:00-14:30 et 18:00-22:30, fermé le lundi */
+function paris(){const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Paris",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).reduce((o,x)=>(o[x.type]=x.value,o),{});return{d:p.weekday,m:(+p.hour%24)*60+ +p.minute}}
+function status(){const {d,m}=paris(),f=x=>String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0");
+ const S=[[660,870],[1080,1350]];
+ if(d!=="Mon"){for(const [a,b] of S){if(m>=a&&m<b)return['<b>Ouvert</b> · Ferme à '+f(b),"ok"]}
+  const n=S.find(([a])=>m<a);if(n)return['<b style="color:#d93025">Fermé</b> · Ouvre à '+f(n[0]),"no"]}
+ return['<b style="color:#d93025">Fermé</b> · Ouvre '+(d==="Sun"?"mardi":d==="Mon"?"mardi":"demain")+" à 11:00","no"]}
+const ST=status();$("#st").innerHTML=ST[0];$("#st2").innerHTML=ST[0];
+</script>
+</body>
+</html>
