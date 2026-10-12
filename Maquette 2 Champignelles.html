@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Via Pizza – Pizzas, kebabs & burgers à Champignelles</title>
+<meta name="description" content="Via Pizza, fast-food à Champignelles : pizzas, tacos, kebabs, burgers. 10 avenue Grosse Pierre. Appelez le 03 86 74 24 72.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. VARIABLES : palette "néon de nuit". Tout le thème se règle ici.
+   ============================================================ */
+:root{
+  --fond:#0a0a14;
+  --fond2:#12122a;
+  --rose:#ff2e93;
+  --cyan:#00e5ff;
+  --lime:#b6ff3b;
+  --violet:#7a5cff;
+  --texte:#f2f2ff;
+  --doux:#a5a5c8;
+  --verre:rgba(255,255,255,.06);
+  --bord:rgba(255,255,255,.14);
+  --degrade:linear-gradient(90deg,var(--rose),var(--violet),var(--cyan));
+  --titre:'Unbounded',sans-serif;
+  --corps:'Bricolage Grotesque',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --rail:250px;            /* largeur de la barre latérale (ordinateur) */
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--corps);background:var(--fond);color:var(--texte);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+section{padding:110px 5vw;position:relative}
+h2{font-family:var(--titre);font-weight:800;font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.1}
+.grad{background:var(--degrade);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:glisse 6s linear infinite}
+@keyframes glisse{to{background-position:200% center}}
+.kicker{display:inline-flex;align-items:center;gap:10px;color:var(--cyan);font-weight:700;font-size:.8rem;
+  letter-spacing:.25em;text-transform:uppercase;margin-bottom:18px}
+.kicker::before{content:"";width:34px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+
+.btn{display:inline-block;font-weight:700;padding:16px 34px;border-radius:14px;position:relative;
+  background:var(--degrade);background-size:200% auto;color:#fff;border:0;
+  box-shadow:0 0 28px rgba(255,46,147,.45);transition:transform .4s var(--ease),box-shadow .4s,background-position .6s}
+.btn:hover{transform:translateY(-4px);background-position:right center;box-shadow:0 10px 40px rgba(0,229,255,.5)}
+
+.halo{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(122,92,255,.22),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%;transition:left .35s ease-out,top .35s ease-out}
+section,header,.marquee,footer{z-index:1}
+
+/* ============================================================
+   3. NAVIGATION
+   Mobile : barre flottante en haut (se cache en descendant).
+   Ordinateur (>980px) : barre latérale fixe à gauche.
+   ============================================================ */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1100px,92vw);
+  display:flex;justify-content:space-between;align-items:center;padding:12px 22px;border-radius:20px;
+  background:rgba(14,14,32,.6);backdrop-filter:blur(18px);border:1px solid var(--bord);
+  transition:transform .5s var(--ease)}
+nav.cache{transform:translate(-50%,-140%)}
+.logo{display:flex;align-items:center;gap:10px;min-height:46px;font-family:var(--titre);font-weight:800;font-size:1.1rem}
+.logo img{height:40px;width:40px;border-radius:50%;object-fit:cover}
+.logo span{color:var(--rose);text-shadow:0 0 14px var(--rose)}
+nav ul{display:flex;gap:6px;list-style:none}
+nav ul a{display:block;padding:8px 16px;border-radius:10px;color:var(--doux);font-weight:500;transition:all .3s}
+nav ul a:hover{color:#fff;background:var(--verre)}
+.tel{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 20px;border-radius:12px;font-weight:700;border:1px solid var(--lime);color:var(--lime);transition:all .3s var(--ease);text-align:center}
+.tel:hover{background:var(--lime);color:var(--fond);box-shadow:0 0 28px rgba(182,255,59,.55)}
+.horaires{display:none}
+@media(max-width:980px){nav ul{display:none}}
+
+@media(min-width:981px){
+  body{padding-left:var(--rail)}
+  nav,nav.cache{top:0;left:0;bottom:0;transform:none;width:var(--rail);border-radius:0;border-width:0 1px 0 0;
+    flex-direction:column;align-items:stretch;justify-content:flex-start;gap:40px;padding:34px 22px}
+  .logo{flex-direction:column;align-items:flex-start;gap:14px;font-size:1.35rem}
+  .logo img{height:84px;width:84px}
+  nav ul{flex-direction:column;gap:4px}
+  nav ul a{padding:12px 16px;font-size:1.02rem}
+  .tel{margin-top:auto;padding:15px 20px}
+  .horaires{display:block;color:var(--doux);font-size:.82rem;line-height:1.5;text-align:center}
+}
+
+/* ============================================================
+   4. HERO : grande photo plein cadre, texte en bas à gauche
+   ============================================================ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:130px 5vw 0;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;z-index:0}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,var(--fond) 4%,rgba(10,10,20,.72) 42%,rgba(10,10,20,.25) 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;z-index:1;animation:derive 14s ease-in-out infinite alternate}
+.blob.b1{width:420px;height:420px;background:var(--rose);top:-80px;left:-100px}
+.blob.b2{width:380px;height:380px;background:var(--violet);bottom:-100px;right:10%;animation-delay:-5s}
+.blob.b3{width:260px;height:260px;background:var(--cyan);top:30%;right:-60px;animation-delay:-9s;opacity:.3}
+@keyframes derive{to{transform:translate(70px,50px) scale(1.2)}}
+.hero-texte{position:relative;z-index:2;max-width:720px;padding-bottom:50px}
+.hero h1{font-family:var(--titre);font-weight:800;font-size:clamp(2.6rem,7.4vw,6.4rem);line-height:1.02;letter-spacing:-.03em}
+.hero p{margin:24px 0 32px;font-size:1.15rem;color:#d4d4ee;max-width:500px}
+.badge{position:absolute;top:130px;right:5vw;z-index:2;padding:16px 22px;border-radius:18px;background:rgba(14,14,32,.65);
+  backdrop-filter:blur(14px);border:1px solid var(--bord);animation:flotte 5s ease-in-out infinite}
+@keyframes flotte{50%{transform:translateY(-14px)}}
+.badge b{display:block;font-family:var(--titre);font-size:1.9rem;color:var(--lime);text-shadow:0 0 18px rgba(182,255,59,.6)}
+.badge span{font-size:.8rem;color:var(--doux)}
+
+/* Bandeau de chiffres collé en bas du hero */
+.chiffres{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);margin:0 -5vw;
+  background:rgba(14,14,32,.7);backdrop-filter:blur(16px);border-top:1px solid var(--bord)}
+.chiffres>div{padding:22px 5vw;text-align:left;border-right:1px solid var(--bord);display:flex;align-items:center;gap:16px}
+.chiffres>div:last-child{border-right:0}
+.chiffres b{font-family:var(--titre);font-weight:800;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1;
+  background:var(--degrade);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chiffres span{color:var(--doux);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}
+@media(max-width:700px){
+  /* le bouton rond d'appel (64 px + 22 px de marge) ne doit pas cacher le bandeau : on lui réserve la place à droite */
+  .chiffres{grid-template-columns:1fr 1fr;padding-right:calc(116px - 5vw)}
+  .chiffres>div{flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding-block:16px}
+  .chiffres>div:last-child{display:none}
+  .badge{display:none}
+  footer{padding-bottom:100px}
+}
+
+/* ============================================================
+   5. BANDEAU DÉFILANT
+   ============================================================ */
+.marquee{overflow:hidden;white-space:nowrap;padding:22px 0;border-block:1px solid var(--bord);background:var(--fond2)}
+.marquee div{display:inline-block;font-family:var(--titre);font-weight:800;font-size:2rem;color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.55);animation:defile 30s linear infinite;transition:color .4s}
+.marquee:hover div{color:rgba(255,255,255,.9);animation-play-state:paused}
+@keyframes defile{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   6. MENU : 2 colonnes. À gauche un bloc qui reste collé à l'écran
+   (titre + cartes papier), à droite le menu dépliant.
+   ============================================================ */
+.carte-menu{background:var(--fond2);display:grid;grid-template-columns:minmax(260px,.62fr) 1.38fr;gap:56px;align-items:start}
+.menu-gauche{position:sticky;top:40px}
+.menu-gauche .intro{color:var(--doux);margin-top:16px}
+.menu-gauche .astuce{margin-top:18px}
+.accordeon{display:grid;gap:16px}
+.panneau{border-radius:26px;background:var(--verre);border:1px solid var(--bord);backdrop-filter:blur(10px);
+  overflow:hidden;transition:border-color .4s,box-shadow .5s}
+.panneau.ouvert{border-color:rgba(0,229,255,.55);box-shadow:0 0 50px rgba(0,229,255,.16)}
+.entete{width:100%;display:flex;align-items:center;gap:20px;padding:14px 24px 14px 14px;background:none;border:0;
+  color:inherit;font:inherit;text-align:left;cursor:pointer}
+.photo{position:relative;overflow:hidden;display:grid;place-items:center;font-size:6rem;
+  background:linear-gradient(160deg,rgba(255,46,147,.35),rgba(0,229,255,.25))}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.entete .photo{flex:none;width:110px;height:92px;border-radius:18px;font-size:2.6rem;border:1px solid var(--bord)}
+.entete .titre{flex:1}
+.entete h3{font-family:var(--titre);font-weight:500;font-size:clamp(1.05rem,2.2vw,1.4rem)}
+.entete small{display:block;color:var(--doux);font-size:.88rem;margin-top:2px}
+.plus{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--bord);display:grid;place-items:center;
+  font-size:0;transition:transform .5s var(--ease)}
+.plus::before{content:"";width:10px;height:10px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:translateY(-3px) rotate(45deg)}
+.panneau.ouvert .plus{transform:rotate(180deg)}
+.contenu{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.panneau.ouvert .contenu{grid-template-rows:1fr}
+.contenu>div{overflow:hidden}
+.corps{padding:6px 28px 30px;display:grid;gap:26px}
+.corps h4{font-family:var(--titre);font-weight:500;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:10px}
+.corps h4 small{color:var(--doux);font-family:var(--corps);letter-spacing:0;text-transform:none;font-size:.82rem;margin-left:6px}
+.lignes{list-style:none;display:grid;gap:8px}
+.lignes li{display:flex;align-items:baseline;gap:10px}
+.lignes li::after{content:"";order:1;flex:1;border-bottom:1px dotted rgba(255,255,255,.28);transform:translateY(-4px)}
+.lignes li>span{order:0}
+.lignes li>b{order:2;color:var(--lime);font-weight:700;white-space:nowrap}
+.lignes small{display:block;color:var(--doux);font-size:.8rem;line-height:1.3}
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:26px 40px}
+/* Simple texte (pas de boutons) : le site n'a pas de commande en ligne */
+.pastilles{display:flex;flex-wrap:wrap;column-gap:.5em;color:var(--texte);font-size:.92rem;line-height:1.9}
+.pastilles span{white-space:nowrap}
+.pastilles span:not(:last-child)::after{content:"·";color:var(--doux);margin-left:.5em}   /* le point reste collé au mot qui précède : jamais en début de ligne */
+.astuce{font-size:.88rem;color:var(--doux)}
+
+/* La carte des pizzas : cadre dégradé néon fixe (pas d'animation), l'image est sur fond blanc comme le papier */
+.menu-cadre{padding:2px;border-radius:22px;background:var(--degrade);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 46px rgba(122,92,255,.28)}
+.menu-img{display:block;width:100%;height:auto;border-radius:20px;background:#fbfbfb}
+.agrandir{position:relative;display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;border-radius:20px;font:inherit;color:inherit}
+.agrandir-badge{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:99px;
+  background:rgba(10,10,20,.82);backdrop-filter:blur(10px);border:1px solid var(--bord);color:#fff;font-weight:700;font-size:.9rem}
+/* Visionneuse plein écran : on peut faire défiler l'image (et la pincer sur téléphone) */
+.plein-ecran{position:fixed;inset:0;z-index:100;background:#05050c;overflow:auto;-webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.plein-ecran.actif{opacity:1;visibility:visible}
+.plein-ecran .zone{width:max-content;min-width:100%;padding:72px 12px 28px}
+.plein-ecran img{display:block;margin:0 auto;width:min(1200px,calc(100vw - 24px));height:auto;border-radius:12px;background:#fbfbfb}
+.fermer{position:fixed;top:14px;right:14px;z-index:110;min-width:48px;height:48px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:99px;border:1px solid var(--bord);background:rgba(20,20,44,.92);color:#fff;font:700 .95rem var(--corps);cursor:pointer}
+.fermer:hover{border-color:var(--rose)}
+.plein-ecran .conseil{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:110;padding:10px 18px;border-radius:99px;background:rgba(20,20,44,.92);
+  border:1px solid var(--bord);font-size:.82rem;color:var(--doux);white-space:nowrap;pointer-events:none;display:none}
+@media(max-width:700px){
+  .plein-ecran img{width:250vw;max-width:none}
+  .plein-ecran .conseil{display:block}
+}
+/* Description + tailles de pizza (une seule ligne compacte) */
+.descr{color:var(--doux);font-size:.95rem}
+.tailles{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--doux);margin-top:-14px}
+.tailles b{color:var(--lime);font-weight:700;margin-left:4px}
+
+@media(max-width:1100px){.carte-menu{grid-template-columns:1fr;gap:36px}.menu-gauche{position:static}}
+@media(max-width:700px){.deux{grid-template-columns:1fr}.entete .photo{width:78px;height:70px}.corps{padding-inline:18px}}
+
+/* ============================================================
+   7. CONTACT : titre, carte en grand bandeau, puis cartes d'infos en grille
+   ============================================================ */
+.contact{background:var(--fond)}
+.contact-tete{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:34px}
+.carte-map{border-radius:28px;overflow:hidden;border:1px solid var(--bord);box-shadow:0 0 60px rgba(122,92,255,.3);height:380px}
+.carte-map iframe{width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) saturate(.8)}
+.infos{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:22px}
+.infos li{display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:18px;background:var(--verre);border:1px solid var(--bord);
+  transition:transform .4s var(--ease),border-color .3s}
+.infos li:hover{transform:translateY(-6px);border-color:var(--rose)}
+.infos .ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.3rem;
+  background:linear-gradient(135deg,rgba(255,46,147,.3),rgba(0,229,255,.25))}
+.infos small{display:block;color:var(--doux)}
+.infos li{position:relative;min-height:64px}
+.infos a::after{content:"";position:absolute;inset:0;border-radius:18px}      /* toute la carte est la zone de clic */
+.infos a{display:flex;align-items:center;min-height:44px}
+.infos a:hover{color:var(--cyan)}
+
+.toast{position:fixed;left:50%;bottom:28px;z-index:80;transform:translate(-50%,30px);opacity:0;pointer-events:none;
+  padding:14px 22px;border-radius:16px;background:rgba(14,14,32,.92);backdrop-filter:blur(14px);border:1px solid var(--lime);
+  font-weight:500;white-space:nowrap;transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.toast.actif{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--lime);font-family:var(--titre);font-weight:500}
+footer{text-align:center;padding:34px;color:var(--doux);font-size:.88rem;border-top:1px solid var(--bord)}
+footer b{color:var(--rose)}
+
+.appel{position:fixed;right:22px;bottom:22px;z-index:60;width:64px;height:64px;border-radius:50%;background:var(--degrade);
+  display:grid;place-items:center;font-size:1.6rem;animation:onde 2.2s infinite;transition:transform .4s var(--ease),opacity .3s}
+.appel.cache{transform:translateY(110px) scale(.6);opacity:0;pointer-events:none}
+@keyframes onde{0%{box-shadow:0 0 0 0 rgba(255,46,147,.65)}100%{box-shadow:0 0 0 28px rgba(255,46,147,0)}}
+
+/* ============================================================
+   8. APPARITION AU SCROLL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(40px);filter:blur(10px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease)}
+.reveal.visible{opacity:1;transform:none;filter:none}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+
+<body>
+<div class="halo" id="halo"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<nav id="nav">
+  <a href="#accueil" class="logo">
+    <img src="assets/logo.jpg" alt="" onerror="this.remove()">
+    <div>VIA<span>PIZZA</span></div>
+  </a>
+  <ul>
+    <li><a href="#menu">Le menu</a></li>
+    <li><a href="#contact">Venir nous voir</a></li>
+  </ul>
+  <p class="horaires">Mardi au dimanche<br>Fermé le lundi</p>
+  <a class="tel" href="tel:+33386742472">Commander</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="accueil">
+  <img class="hero-bg" src="assets/devanture.jpg" alt="Devanture de Via Pizza" onerror="this.remove()">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="badge"><b>4,7 ★</b><span>sur 48 avis<br>Google</span></div>
+
+  <div class="hero-texte reveal visible">
+    <span class="kicker">Fast-food à Champignelles</span>
+    <h1>Pizza,<br><span class="grad">Tacos</span><br>& Burger</h1>
+    <p>Chaud, généreux, fait pour les grosses faims. Sur place, à emporter, ou livré : on s'occupe de tout !</p>
+    <a class="btn" href="#menu">Voir le menu</a>
+  </div>
+
+  <!-- ============ CHIFFRES ============ -->
+  <div class="chiffres">
+    <div><b data-to="36">0</b><span>Pizzas<br>au choix</span></div>
+    <div><b data-to="48">0</b><span>Avis<br>Google</span></div>
+    <div><b style="font-size:1.1rem;line-height:1.3">11h–14h30<br>18h–22h30</b><span>Fermé<br>le lundi</span></div>
+  </div>
+</header>
+
+<!-- ============ BANDEAU ============ -->
+<div class="marquee"><div id="defile">PIZZAS &nbsp;✦&nbsp; TACOS &nbsp;✦&nbsp; KEBABS &nbsp;✦&nbsp; BURGERS &nbsp;✦&nbsp; BOWLS &nbsp;✦&nbsp; À EMPORTER &nbsp;✦&nbsp; LIVRAISON &nbsp;✦&nbsp; </div></div>
+
+<!-- ============ MENU DÉPLIANT ============ -->
+<section class="carte-menu" id="menu">
+  <div class="menu-gauche">
+    <h2 class="reveal">Attention,<br><span class="grad">ça donne faim</span></h2>
+  </div>
+
+  <div class="accordeon" id="accordeon">
+
+    <!-- ---- PIZZAS ---- -->
+    <article class="panneau reveal ouvert">
+      <button class="entete" aria-expanded="true">
+        <span class="photo">🍕<img src="assets/zoom-pizza.jpg" alt="" onerror="this.remove()"></span>
+        <span class="titre"><h3>Les pizzas</h3><small>36 recettes, 3 tailles</small></span>
+        <span class="plus">›</span>
+      </button>
+      <div class="contenu"><div><div class="corps">
+        <p class="descr">Préparées avec de la pâte fraîche : 36 recettes, des grands classiques aux créations gourmandes, à déguster sur place ou à emporter.</p>
+        <p class="tailles"><span>Junior 26 cm <b>9,50 €</b></span><span>Senior 31 cm <b>14,50 €</b></span><span>Méga 40 cm <b>19,50 €</b></span></p>
+        <div>
+          <h4>Nos recettes</h4>
+          <div class="pastilles">
+            <span>Marguerita</span><span>Regina</span><span>Napolitaine</span><span>Paysanne</span><span>Campione</span>
+            <span>Calzone soufflée</span><span>Végétarienne</span><span>Chef</span><span>Hawaïenne</span><span>4 Saisons</span>
+            <span>Orientale</span><span>Neptune</span><span>Américaine</span><span>Genova</span><span>Chicken</span>
+            <span>Pescatore</span><span>Boursin</span><span>4 Fromages</span><span>Kebab</span><span>Mexicaine</span>
+            <span>Gourmande</span><span>Boisée</span><span>Campagnarde</span><span>Rimini</span><span>5 Fromages</span>
+            <span>Tartiflette</span><span>Saumon</span><span>Texane</span><span>Royale</span><span>Montagnarde</span>
+            <span>Fermière</span><span>Chev'miel</span><span>Indienne</span><span>Barbecue</span><span>Cannibale</span><span>Best-Off</span>
+          </div>
+        </div>
+        <p class="astuce">🥖 Pâte fraîche. Ingrédient supplémentaire : 1,50 € (junior), 2,00 € (senior), 2,50 € (méga). Compositions détaillées sur la carte ci-dessous.</p>
+        <figure class="menu-cadre">
+          <button class="agrandir" type="button" id="ouvrirCarte" aria-label="Afficher la carte des pizzas en plein écran">
+            <img class="menu-img" src="assets/menu-pizzas.jpg" alt="La carte des pizzas" width="1200" height="2066" loading="lazy" decoding="async" onerror="this.remove()">
+            <span class="agrandir-badge">⤢&nbsp; Plein écran</span>
+          </button>
+        </figure>
+      </div></div></div>
+    </article>
+
+    <!-- ---- TACOS / KEBABS ---- -->
+    <article class="panneau reveal">
+      <button class="entete" aria-expanded="false">
+        <span class="photo">🌯<img src="assets/zoom-tacos.jpg" alt="" onerror="this.remove()"></span>
+        <span class="titre"><h3>Tacos, kebabs & bowls</h3><small>Sandwichs, tacos, bowls, assiettes</small></span>
+        <span class="plus">›</span>
+      </button>
+      <div class="contenu"><div><div class="corps">
+        <div class="deux">
+          <div>
+            <h4>Sandwichs <small>seul / en menu (frites + boisson 33 cl)</small></h4>
+            <ul class="lignes">
+              <li><span>Kebab</span><b>8,00 / 9,00 €</b></li>
+              <li><span>Chicken tikka</span><b>8,00 / 9,00 €</b></li>
+              <li><span>Cordon bleu</span><b>8,00 / 9,00 €</b></li>
+              <li><span>Américain</span><b>8,00 / 9,00 €</b></li>
+              <li><span>Radical</span><b>8,50 / 9,50 €</b></li>
+              <li><span>Suprême</span><b>8,50 / 9,50 €</b></li>
+              <li><span>Buffalo</span><b>8,50 / 9,50 €</b></li>
+              <li><span>Triple X</span><b>8,50 / 9,50 €</b></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Tacos <small>frites + sauce fromagère + boisson 33 cl</small></h4>
+            <ul class="lignes">
+              <li><span>Tacos M <small>1 viande</small></span><b>9,00 €</b></li>
+              <li><span>Tacos L <small>2 viandes</small></span><b>10,50 €</b></li>
+              <li><span>Tacos XL <small>3 viandes</small></span><b>13,00 €</b></li>
+            </ul>
+            <h4 style="margin-top:22px">Bowls <small>frites + sauce fromagère + viande au choix</small></h4>
+            <ul class="lignes">
+              <li><span>Bowl M <small>1 viande</small></span><b>9,50 €</b></li>
+              <li><span>Bowl L <small>2 viandes</small></span><b>11,00 €</b></li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h4>Assiettes <small>salade, tomates, oignons + sauce au choix</small></h4>
+          <ul class="lignes">
+            <li><span>Kebab</span><b>14,00 €</b></li>
+            <li><span>Chicken</span><b>14,50 €</b></li>
+            <li><span>Steak</span><b>14,50 €</b></li>
+            <li><span>Mixte <small>2 viandes au choix</small></span><b>16,00 €</b></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Viandes au choix</h4>
+          <div class="pastilles"><span>Viande hachée</span><span>Nuggets</span><span>Tenders</span><span>Kebab</span><span>Cordon bleu</span><span>Merguez</span><span>Poulet</span></div>
+          <p class="astuce" style="margin-top:12px">Supplément fromage 1,00 € (chèvre, boursin, mozza, raclette, cheddar) · charcuterie 1,50 € (bacon, jambon, lardons) · supplément viande 1,50 € · gratine ton tacos ou ton bowl : 2,00 €.</p>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- ---- BURGERS ---- -->
+    <article class="panneau reveal">
+      <button class="entete" aria-expanded="false">
+        <span class="photo">🍔<img src="assets/zoom-burger.jpg" alt="" onerror="this.remove()"></span>
+        <span class="titre"><h3>Les burgers</h3><small>Servis avec salade, tomates, oignons</small></span>
+        <span class="plus">›</span>
+      </button>
+      <div class="contenu"><div><div class="corps">
+        <div>
+          <h4>Burgers <small>seul / en menu (frites + boisson)</small></h4>
+          <ul class="lignes">
+            <li><span>Cheese</span><b>6,00 / 7,00 €</b></li>
+            <li><span>Double cheese</span><b>7,00 / 8,00 €</b></li>
+            <li><span>Double bacon</span><b>8,00 / 9,00 €</b></li>
+            <li><span>Royal chicken</span><b>8,50 / 9,50 €</b></li>
+            <li><span>Savoyard</span><b>7,50 / 8,50 €</b></li>
+            <li><span>Le Five <small>5 steaks, 5 fromages, jambon, œuf</small></span><b>11,00 / 12,00 €</b></li>
+            <li><span>360 <small>2 steaks de 180 g, 2 fromages</small></span><b>12,00 / 13,00 €</b></li>
+            <li><span>Le 720 <small>2 burgers 360</small></span><b>23,50 / 24,50 €</b></li>
+          </ul>
+        </div>
+        <p class="astuce">🍔 D'autres burgers sont sur la carte papier.</p>
+      </div></div></div>
+    </article>
+
+    <!-- ---- BOX, OFFRES & CO ---- -->
+    <article class="panneau reveal">
+      <button class="entete" aria-expanded="false">
+        <span class="photo">🍗<img src="assets/zoom-box.jpg" alt="" onerror="this.remove()"></span>
+        <span class="titre"><h3>Box, offres & le reste</h3><small>Tex-Mex, pâtes, salades, desserts</small></span>
+        <span class="plus">›</span>
+      </button>
+      <div class="contenu"><div><div class="corps">
+        <div class="deux">
+          <div>
+            <h4>Les offres</h4>
+            <ul class="lignes">
+              <li><span>Solo <small>1 pizza junior + 4 wings ou nuggets + boisson</small></span><b>13,50 €</b></li>
+              <li><span>Duo <small>1 pizza senior + 6 wings ou nuggets + 2 boissons</small></span><b>19,00 €</b></li>
+              <li><span>Trio <small>3 pizzas junior au choix</small></span><b>27,00 €</b></li>
+              <li><span>Gourmande <small>2 pizzas senior + 2 boissons</small></span><b>28,00 €</b></li>
+              <li><span>Famille <small>2 pizzas méga + 1 maxi boisson</small></span><b>38,00 €</b></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Les box <small>avec frites + boisson</small></h4>
+            <ul class="lignes">
+              <li><span>Box tenders <small>5 tenders</small></span><b>9,50 €</b></li>
+              <li><span>Box chicken <small>12 hot wings</small></span><b>10,50 €</b></li>
+              <li><span>Box mixte <small>3 tenders + 3 hot wings</small></span><b>10,50 €</b></li>
+              <li><span>Box maxi tenders <small>18 tenders</small></span><b>29,50 €</b></li>
+              <li><span>Box maxi wings <small>25 hot wings</small></span><b>32,00 €</b></li>
+            </ul>
+          </div>
+        </div>
+        <div class="deux">
+          <div>
+            <h4>Tex-Mex <small>potatoes + sauce barbecue</small></h4>
+            <ul class="lignes">
+              <li><span>Wings, nuggets, calamars, oignons rings, mozza sticks</span><b>9,50 €</b></li>
+              <li><span>Via Box <small>2 pièces de chaque</small></span><b>12,00 €</b></li>
+              <li><span>Frites / Potatoes <small>la barquette</small></span><b>3,50 €</b></li>
+            </ul>
+          </div>
+          <div>
+            <h4>À table</h4>
+            <ul class="lignes">
+              <li><span>Salades <small>niçoise, suédoise, César…</small></span><b>8,50 €</b></li>
+              <li><span>Pâtes <small>carbonara, saumon, 4 fromages…</small></span><b>9,50 €</b></li>
+              <li><span>Escalopes <small>avec frites ou pâtes + boisson</small></span><b>13,50 €</b></li>
+              <li><span>Paninis <small>+ boisson 33 cl</small></span><b>7,50 €</b></li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h4>Desserts & boissons</h4>
+          <ul class="lignes">
+            <li><span>Tartes (citron, poires, pommes), salade de fruits</span><b>3,00 €</b></li>
+            <li><span>Tiramisu, tarte au daim</span><b>3,50 €</b></li>
+            <li><span>Glaces Häagen-Dazs <small>petit pot / grand pot</small></span><b>3,50 / 8,00 €</b></li>
+            <li><span>Boisson 33 cl, eau 50 cl</span><b>1,50 €</b></li>
+            <li><span>Maxi boisson 1,5 L / 2 L</span><b>3,00 / 3,50 €</b></li>
+          </ul>
+        </div>
+      </div></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="contact-tete reveal">
+    <div>
+      <span class="kicker">Contact</span>
+      <h2>Viens nous <span class="grad">voir !</span></h2>
+    </div>
+  </div>
+
+  <div class="carte-map reveal">
+    <iframe title="Plan d'accès" loading="lazy"
+      src="https://maps.google.com/maps?q=10+avenue+Grosse+Pierre,+89350+Champignelles&output=embed"></iframe>
+  </div>
+
+  <ul class="infos">
+    <li class="reveal"><span class="ico">📍</span><span>10 avenue Grosse Pierre<br>89350 Champignelles</span></li>
+    <li class="reveal"><span class="ico">🕒</span><span>Mardi au dimanche : 11h–14h30 et 18h–22h30<small>Fermé le lundi</small></span></li>
+    <li class="reveal"><span class="ico">🚗</span><span>Sur place, à emporter, livraison<small>Conditions de livraison : nous consulter par téléphone</small></span></li>
+    <li class="reveal"><span class="ico">📞</span><a href="tel:+33386742472">03 86 74 24 72</a></li>
+    <li class="reveal"><span class="ico">⭐</span><a href="https://share.google/TsbVciqNYgrvsnZn2" target="_blank" rel="noopener">Avis Google : 4,7 sur 48 avis</a></li>
+    <li class="reveal"><span class="ico">👍</span><a href="https://www.facebook.com/people/via-pizza-champignelles/61565831100089/" target="_blank" rel="noopener">Suis-nous sur Facebook</a></li>
+  </ul>
+</section>
+
+<footer>© <span id="annee"></span> <b>Via Pizza</b> – Champignelles. Site non officiel de démonstration.</footer>
+
+<div class="plein-ecran" id="pleinEcran" role="dialog" aria-modal="true" aria-label="La carte des pizzas" aria-hidden="true">
+  <button class="fermer" type="button" id="fermerCarte" aria-label="Fermer la carte">✕ Fermer</button>
+  <div class="zone"><img src="assets/menu-pizzas.jpg" alt="La carte des pizzas en grand"></div>
+  <p class="conseil">Faites glisser ou pincez pour lire</p>
+</div>
+
+<div class="toast" id="toast" role="status">Appelez-nous au <b>03 86 74 24 72</b></div>
+
+<a class="appel" href="tel:+33386742472" aria-label="Appeler Via Pizza">📞</a>
+
+
+<script>
+/* ============================================================
+   JAVASCRIPT
+   ============================================================ */
+
+// 1) Apparition au scroll
+const obs = new IntersectionObserver((entrees) => {
+  entrees.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// 2) Navigation (mobile) : se cache en descendant, réapparaît en remontant.
+//    Sur ordinateur, la barre latérale reste fixe (le CSS annule l'effet).
+//    Le bouton rond d'appel se masque aussi quand on descend, et revient quand on remonte.
+let dernierY = 0;
+const bouton = document.querySelector('.appel');
+addEventListener('scroll', () => {
+  const y = scrollY;
+  if (Math.abs(y - dernierY) < 6) return;                      // ignore les micro-mouvements
+  document.getElementById('nav').classList.toggle('cache', y > dernierY && y > 200);
+  bouton.classList.toggle('cache', y > dernierY && y > 80);
+  dernierY = y;
+}, { passive: true });
+
+// 3) MENU DÉPLIANT : un clic ouvre un panneau et referme les autres
+const panneaux = document.querySelectorAll('.panneau');
+panneaux.forEach(p => {
+  p.querySelector('.entete').addEventListener('click', () => {
+    const veutOuvrir = !p.classList.contains('ouvert');
+    panneaux.forEach(autre => {
+      autre.classList.remove('ouvert');
+      autre.querySelector('.entete').setAttribute('aria-expanded', 'false');
+    });
+    if (veutOuvrir) {
+      p.classList.add('ouvert');
+      p.querySelector('.entete').setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// 4) Compteurs animés (0 -> valeur)
+const obsChiffres = new IntersectionObserver((entrees) => {
+  entrees.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, fin = +el.dataset.to, suffixe = el.dataset.suffix || '';
+    const debut = performance.now(), duree = 1600;
+    (function tick(t) {
+      const p = Math.min((t - debut) / duree, 1);
+      el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3))) + suffixe;
+      if (p < 1) requestAnimationFrame(tick);
+    })(debut);
+    obsChiffres.unobserve(el);
+  });
+}, { threshold: .6 });
+document.querySelectorAll('[data-to]').forEach(el => obsChiffres.observe(el));
+
+// 5) Décor : bandeau doublé (boucle infinie) + année
+const d = document.getElementById('defile');
+d.innerHTML += d.innerHTML;
+document.getElementById('annee').textContent = new Date().getFullYear();
+
+// 6) Le halo de lumière suit la souris
+const halo = document.getElementById('halo');
+addEventListener('mousemove', (e) => { halo.style.left = e.clientX + 'px'; halo.style.top = e.clientY + 'px'; });
+
+// 8) Carte des pizzas en plein écran : s'ouvre au clic, se ferme avec ✕, Échap ou un clic sur le fond sombre
+const visio = document.getElementById('pleinEcran');
+const ouvrir = document.getElementById('ouvrirCarte'), fermer = document.getElementById('fermerCarte');
+function ouvrirCarte() {
+  visio.classList.add('actif'); visio.setAttribute('aria-hidden', 'false');
+  document.documentElement.style.overflow = 'hidden';          // la page derrière ne défile plus
+  visio.scrollTo(0, 0); setTimeout(() => fermer.focus(), 60);   // après le début de l'affichage, sinon le focus est refusé
+}
+function fermerCarte() {
+  visio.classList.remove('actif'); visio.setAttribute('aria-hidden', 'true');
+  document.documentElement.style.overflow = '';
+  ouvrir.focus({ preventScroll: true });
+}
+ouvrir.addEventListener('click', ouvrirCarte);
+fermer.addEventListener('click', fermerCarte);
+visio.addEventListener('click', (e) => { if (e.target === visio || e.target.classList.contains('zone')) fermerCarte(); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape' && visio.classList.contains('actif')) fermerCarte(); });
+
+// 7) Boutons "Commander" : le lien tel: lance l'appel sur téléphone.
+//    Sur ordinateur, le numéro s'affiche aussi quelques secondes.
+const toast = document.getElementById('toast');
+document.querySelectorAll('a[href^="tel:"]').forEach(a => a.addEventListener('click', () => {
+  toast.classList.add('actif');
+  setTimeout(() => toast.classList.remove('actif'), 6000);
+}));
+</script>
+</body>
+</html>
